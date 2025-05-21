@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TextQL + UnitedHealth: $2.3B Analytics Transformation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Design system colors */
+      /* Dark mode */
+      --dark-50: #C5E0D8;    /* Lighter Mint - Primary text/highlights */
+      --dark-100: #8AB3A3;   /* Brighter Sage - Secondary text */
+      --dark-200: #132926;   /* Softened Forest Green - UI panels */
+      --dark-300: #0D1211;   /* Softened Black - Background */
+      --dark-accent: #E0C5B8; /* Soft Terracotta - Accent color */
+      
+      /* Light mode */
+      --light-50: #2A3B35;   /* Deep Forest - Primary text/highlights */
+      --light-100: #4A665C;  /* Deep Sage - Secondary text */
+      --light-200: #E6EBE8;  /* Deeper Light Sage - UI panels */
+      --light-300: #F5F2ED;  /* Eggshell/Cream - Background */
+      --light-accent: #A3738A; /* Muted Mauve - Accent color */
+      
+      /* UnitedHealthcare custom colors */
+      --primary: #005087;
+      --secondary: #00a4e4;
+      --accent: var(--light-accent); /* Using design system accent */
+      --light: var(--light-200);     /* Using design system light surface */
+      --dark: var(--light-50);       /* Using design system dark primary */
+      --success: #20bf55;
+      --danger: #e74c3c;
+      --warning: #f39c12;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px;
+    }
+    
+    body {
+      line-height: 1.6;
+      color: var(--light-100);
+      background-color: var(--light-300);
+      font-weight: 400;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+      padding: 0 10px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav li {
+      margin-left: 30px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 5px;
+    }
+    
+    nav a:hover {
+      color: var(--accent);
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: var(--light-accent);
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: var(--dark-accent);
+      transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--light-accent);
+      color: var(--light-accent);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--light-accent);
+      color: white;
+    }
+    
+    section {
+      padding: 80px 0;
+    }
+    
+    #hero {
+      padding: 160px 0 100px;
+      background: linear-gradient(135deg, var(--dark-200), var(--dark-300));
+      color: var(--dark-50);
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      font-weight: 500;
+      color: var(--dark-50);
+    }
+    
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: var(--light-50);
+      font-weight: 500;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--light-50);
+      font-weight: 500;
+    }
+    
+    .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+    
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    
+    .col-50 {
+      flex-basis: calc(50% - 20px);
+      min-width: 300px;
+    }
+    
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      background-color: var(--light-200);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    
+    .card ul {
+      padding-left: 20px;
+      margin: 15px 0;
+    }
+    
+    .card li {
+      margin-bottom: 8px;
+    }
+    
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--light-accent);
+    }
+    
+    .metric {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .metric-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--light-accent);
+      margin-bottom: 10px;
+    }
+    
+    .metric-label {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    
+    .story-card {
+      position: relative;
+      background-color: var(--light-200);
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      padding: 35px;
+      margin-bottom: 40px;
+      border-left: 5px solid var(--light-accent);
+    }
+    
+    .story-step {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .story-step:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: var(--light-accent);
+    }
+    
+    .story-step:after {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 25px;
+      width: 1px;
+      height: calc(100% - 5px);
+      background-color: var(--light-accent);
+    }
+    
+    .story-step:last-child:after {
+      display: none;
+    }
+    
+    .story-label {
+      font-weight: 600;
+      color: var(--light-50);
+      margin-bottom: 5px;
+    }
+    
+    .quote {
+      font-style: italic;
+      background-color: var(--light);
+      padding: 25px;
+      border-radius: 8px;
+      margin: 25px 0;
+      position: relative;
+    }
+    
+    .quote:before {
+      content: '"';
+      position: absolute;
+      top: 0;
+      left: 10px;
+      font-size: 3rem;
+      color: var(--primary);
+      opacity: 0.2;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .badge-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .badge-secondary {
+      background-color: var(--secondary);
+      color: white;
+    }
+    
+    .badge-accent {
+      background-color: var(--accent);
+      color: white;
+    }
+    
+    .badge-light {
+      background-color: var(--light);
+      color: var(--dark);
+    }
+    
+    .badge-danger {
+      background-color: var(--danger);
+      color: white;
+    }
+    
+    .use-case {
+      margin-bottom: 50px;
+    }
+    
+    .use-case-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .use-case-icon {
+      background-color: var(--light);
+      color: var(--primary);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-right: 15px;
+    }
+    
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 40px auto 40px;
+    }
+    
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--light);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+    
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+      margin-bottom: 40px;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border: 4px solid var(--light-accent);
+      border-radius: 50%;
+      top: 15px;
+      right: -13px;
+      z-index: 1;
+    }
+    
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+    
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+    
+    .timeline-item:nth-child(odd)::after {
+      right: -13px;
+    }
+    
+    .timeline-item:nth-child(even)::after {
+      left: -13px;
+    }
+    
+    .timeline-content {
+      background-color: var(--light-200);
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+    }
+    
+    .timeline-content ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.7;
+    }
+    
+    .timeline-title {
+      font-weight: 600;
+      color: var(--light-50);
+      margin-bottom: 5px;
+      font-size: 1.2rem;
+    }
+    
+    .timeline-date {
+      font-weight: 500;
+      color: var(--light-accent);
+      margin-bottom: 15px;
+      font-size: 1rem;
+      display: block;
+    }
+    
+    .cta {
+      text-align: center;
+      background-color: var(--light);
+      padding: 100px 0 120px;
+    }
+    
+    footer {
+      background-color: var(--dark-200);
+      color: var(--dark-50);
+      padding: 50px 0;
+      text-align: center;
+    }
+    
+    .text-accent {
+      color: var(--light-accent);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin: 60px 0 40px;
+    }
+
+    .stat-card {
+      background-color: var(--light);
+      padding: 30px 20px;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--light-accent);
+      margin-bottom: 10px;
+    }
+
+    .stat-desc {
+      font-size: 1rem;
+      color: var(--light-50);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .comparison-table th {
+      background-color: var(--light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .comparison-table tr:hover {
+      background-color: #f8f8f8;
+    }
+
+    .check {
+      color: var(--success);
+      font-size: 1.2rem;
+    }
+
+    .cross {
+      color: #ff4757;
+      font-size: 1.2rem;
+    }
+
+    .case-study {
+      background-color: var(--light);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .case-study h4 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .case-study-result {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .case-study-result i {
+      color: var(--success);
+      margin-right: 10px;
+    }
+
+    .animated-number {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .mlr-scenario {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin: 25px 0;
+      border-left: 4px solid;
+    }
+    
+    .mlr-scenario ul {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    
+    .mlr-scenario li {
+      margin-bottom: 10px;
+    }
+    
+    .scenario-compliant {
+      border-left-color: var(--success);
+    }
+    
+    .scenario-risk {
+      border-left-color: var(--danger);
+    }
+    
+    .scenario-potential {
+      border-left-color: var(--warning);
+    }
+    
+    .scenario-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    
+    .scenario-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 18px;
+      font-size: 1.2rem;
+      color: white;
+    }
+    
+    .scenario-compliant .scenario-icon {
+      background-color: var(--success);
+    }
+    
+    .scenario-risk .scenario-icon {
+      background-color: var(--danger);
+    }
+    
+    .scenario-potential .scenario-icon {
+      background-color: var(--warning);
+    }
+    
+    .scenario-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    .next-steps {
+      background-color: var(--light);
+      border-radius: 8px;
+      padding: 30px;
+      margin-top: 30px;
+    }
+    
+    .next-steps h4 {
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+    
+    .step-item {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .step-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .step-number {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background-color: var(--light-accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-weight: 600;
+    }
+    
+    .use-case-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .use-case-card {
+      background-color: var(--light-200);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 30px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .use-case-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .use-case-card h3 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .use-case-card h3 span {
+      min-width: 35px;
+      height: 35px;
+      background-color: var(--light);
+      color: var(--light-50);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .use-case-card .highlight {
+      background-color: var(--light);
+      padding: 15px;
+      border-radius: 6px;
+      font-weight: 600;
+      margin: 20px 0;
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      
+      .timeline-item::after {
+        left: 18px;
+      }
+      
+      .timeline-item:nth-child(even) {
+        left: 0;
+      }
+      
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <img src="logos/textql-new.svg" alt="TextQL" style="height: 30px;">
+        <span style="margin: 0 12px; color: var(--light-50); font-weight: 300;">for</span>
+        <img src="logos/unitedheathcare.png" alt="UnitedHealth Group" style="height: 30px;">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#story" style="color: var(--light-50);">Our Story</a></li>
+          <li><a href="#mlr-case" style="color: var(--light-50);">MLR Forecasting</a></li>
+          <li><a href="#more-cases" style="color: var(--light-50);">More Use Cases</a></li>
+          <li><a href="#roadmap" style="color: var(--light-50);">Roadmap</a></li>
+          <li><a href="#" style="color: var(--light-50);">Snowflake Workshop Primer</a></li>
+          <li><a href="#cta" class="btn btn-outline">Get Started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="hero">
+    <div class="container">
+      <h1>The $2.3B MLR Forecasting Opportunity <br>for UnitedHealth Group</h1>
+      <div class="subtitle">Autonomous deep research for precise Medical Loss Ratio forecasting and beyond.</div>
+      <a href="#cta" class="btn">Schedule a Demo</a>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="container">
+      <h2>Your MLR Forecasting Challenge</h2>
+      <div class="flex">
+        <div class="col-50">
+          <div class="story-card">
+            <div class="story-step">
+              <div class="story-label">The Question</div>
+              <p>It's late Thursday afternoon when your actuarial team detects a 3.2% deviation in the Medicare Advantage MLR forecast for the Southeast region. The VP of Finance needs answers by Monday's executive meeting.</p>
+            </div>
+            
+            <div class="story-step">
+              <div class="story-label">The Current Process</div>
+              <p>Your analytics team pulls historical data from five disconnected sources, manually joining claims data, membership files, provider information, regional market data, and regulatory documents.</p>
+              <p>Four data scientists will spend the entire weekend building, testing, and validating models. Even with this effort, the forecast will have a 12-15% error margin, with limited granularity.</p>
+              <div class="quote">
+                "I need to understand what's happening at the county level, but our analytics team says that's at least a 2-week project." — Chief Actuary
+              </div>
+            </div>
+            
+            <div class="story-step">
+              <div class="story-label">The TextQL Solution</div>
+              <p>With TextQL's autonomous deep research capabilities, your team simply asks: "What's driving the MLR deviation in Southeast Medicare Advantage?"</p>
+              <p>TextQL integrates all your disparate data sources, identifies patterns across billions of data points, and generates a granular analysis down to the county level in minutes — not days or weeks.</p>
+            </div>
+            
+            <div class="story-step">
+              <div class="story-label">The Result</div>
+              <p>By Monday morning, you have a comprehensive analysis showing that the deviation is driven by three specific counties with higher-than-expected utilization in cardiology services, with a forecast accuracy of 86%.</p>
+              <p>The VP of Finance receives actionable insights with confidence intervals, trend analysis, and specific recommendations for plan adjustments to maintain compliance and optimize profitability.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-50">
+          <div class="card">
+            <h3>The Business Impact</h3>
+            <p>For UnitedHealth Group, with $371 billion in annual revenue, MLR forecasting represents a critical business function with massive financial implications:</p>
+            <div class="badge badge-danger">$100M+ in penalties</div>
+            <div class="badge badge-danger">Sub-optimal pricing</div>
+            <div class="badge badge-danger">Regulatory scrutiny</div>
+            <div class="badge badge-danger">Competitive disadvantage</div>
+            
+            <p>Even a 1% improvement in MLR forecasting accuracy represents:</p>
+            <ul>
+              <li><strong>$50-150 million</strong> in optimized premium pricing</li>
+              <li><strong>$10-30 million</strong> in avoided regulatory penalties</li>
+              <li><strong>$5-15 million</strong> in reduced actuarial overhead</li>
+            </ul>
+            
+            <p>TextQL delivers <strong>86% forecasting accuracy</strong> — <strong>20% better</strong> than traditional actuarial approaches across all lines of business.</p>
+          </div>
+          
+          <div class="next-steps">
+            <h4>Implementation Timeline</h4>
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div>
+                <strong>Week 1-2:</strong> Initial integration with UnitedHealthcare claims and membership data
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div>
+                <strong>Week 3-4:</strong> MLR forecasting model training and validation
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div>
+                <strong>Week 5-6:</strong> Pilot launch with Medicare Advantage business unit
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">4</div>
+              <div>
+                <strong>Week 7-8:</strong> Full deployment across all lines of business
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mlr-case" style="background-color: var(--light);">
+    <div class="container">
+      <h2>TextQL's MLR Forecasting in Action</h2>
+      <p>See how TextQL's autonomous deep research transforms UnitedHealth's MLR forecasting with a concrete example:</p>
+      
+      <h3>Southeast Region Medicare Advantage MLR Analysis</h3>
+      
+      <div class="mlr-scenario scenario-risk">
+        <div class="scenario-header">
+          <div class="scenario-icon">!</div>
+          <div class="scenario-title">Risk Alert: MLR Forecast Deviation Detected</div>
+        </div>
+        <p>TextQL has detected a significant 3.2% upward deviation in the Southeast region Medicare Advantage MLR forecast, with the following root causes:</p>
+        <ul>
+          <li><strong>Geographic Hotspots:</strong> Three counties in Florida showing 17% higher utilization rates for cardiology services</li>
+          <li><strong>Provider Network Anomaly:</strong> Two large cardiology practice groups with utilization rates 22% above network average</li>
+          <li><strong>Demographic Shift:</strong> 8% increase in high-risk members (3+ chronic conditions) in affected counties</li>
+        </ul>
+      </div>
+      
+      <div class="mlr-scenario scenario-potential">
+        <div class="scenario-header">
+          <div class="scenario-icon">?</div>
+          <div class="scenario-title">Intervention Opportunities</div>
+        </div>
+        <p>TextQL has identified three intervention opportunities to address the forecast deviation:</p>
+        <ul>
+          <li><strong>Provider Contract Adjustment:</strong> Renegotiate rates with the two outlier cardiology groups (estimated 1.1% MLR reduction)</li>
+          <li><strong>Care Management Enhancement:</strong> Deploy targeted care management for high-risk members (estimated 0.8% MLR reduction)</li>
+          <li><strong>Premium Adjustment:</strong> Implement county-level premium refinement for next enrollment period (estimated 1.3% MLR reduction)</li>
+        </ul>
+      </div>
+      
+      <div class="mlr-scenario scenario-compliant">
+        <div class="scenario-header">
+          <div class="scenario-icon">✓</div>
+          <div class="scenario-title">Projected Outcome with TextQL Recommendations</div>
+        </div>
+        <p>Implementing TextQL's recommended interventions is projected to result in:</p>
+        <ul>
+          <li><strong>MLR Reduction:</strong> 3.2% reduction, bringing forecast back to target range (82.1%)</li>
+          <li><strong>Financial Impact:</strong> $27.3 million in cost savings for current fiscal year</li>
+          <li><strong>Compliance Status:</strong> Return to full regulatory compliance with 95% confidence</li>
+          <li><strong>Member Impact:</strong> Maintained or improved quality measures with no adverse effect on member satisfaction</li>
+        </ul>
+      </div>
+      
+      <div class="quote" style="font-size: 1.2rem; text-align: center;">
+        "TextQL's autonomous research capabilities deliver the granular MLR insights we need in hours, not weeks. This is a game-changer for our actuarial and finance teams."
+      </div>
+    </div>
+  </section>
+
+  <section id="more-cases">
+    <div class="container">
+      <h2>Beyond MLR: Five More High-Impact Use Cases</h2>
+      <p>Once MLR forecasting is optimized, TextQL can extend to these additional high-value opportunities:</p>
+      
+      <div class="use-case-container">
+        <div class="use-case-card">
+          <h3><span>1</span> Granular Risk Assessment</h3>
+          <p>Revolutionize risk stratification with multi-domain data integration, continuous risk score updates, and pattern identification at county and zip code levels.</p>
+          <div class="highlight">10-20% reduction in hospital readmissions</div>
+          <div class="highlight">59% improvement in closed risk per patient</div>
+        </div>
+        
+        <div class="use-case-card">
+          <h3><span>2</span> Fraud Detection Amplification</h3>
+          <p>Transform fraud detection through continuous monitoring, self-learning algorithms for emerging patterns, and network analysis uncovering complex relationships.</p>
+          <div class="highlight">20% improvement in detection accuracy</div>
+          <div class="highlight">10% faster real-time fraud detection</div>
+        </div>
+        
+        <div class="use-case-card">
+          <h3><span>3</span> Clinical Data Analysis</h3>
+          <p>Extract insights from unstructured clinical notes, integrate multimodal medical data, and generate personalized outcome predictions at scale.</p>
+          <div class="highlight">34% reduction in operational costs</div>
+          <div class="highlight">$9B less in emergency care costs</div>
+        </div>
+        
+        <div class="use-case-card">
+          <h3><span>4</span> Provider Performance Analysis</h3>
+          <p>Comprehensively evaluate performance across multiple dimensions, integrating clinical outcomes, cost, patient experience, and operational efficiency metrics.</p>
+          <div class="highlight">18% fewer hospitalizations</div>
+          <div class="highlight">10% fewer ER visits</div>
+        </div>
+        
+        <div class="use-case-card">
+          <h3><span>5</span> Data Scientist Productivity</h3>
+          <p>Automate routine research tasks through natural language querying, automated data preparation, and accelerated hypothesis testing.</p>
+          <div class="highlight">45% of administrative tasks automated</div>
+          <div class="highlight">50-60% faster processing time</div>
+        </div>
+      </div>
+
+      <div class="stat-grid" style="margin-top: 60px;">
+        <div class="stat-card animated-number">
+          <div class="stat-number">$2.3B+</div>
+          <div class="stat-desc">Total Annual Value Potential</div>
+        </div>
+        <div class="stat-card animated-number">
+          <div class="stat-number">13-25%</div>
+          <div class="stat-desc">Admin Cost Reduction</div>
+        </div>
+        <div class="stat-card animated-number">
+          <div class="stat-number">8</div>
+          <div class="stat-desc">Week Implementation</div>
+        </div>
+        <div class="stat-card animated-number">
+          <div class="stat-number">3-5x</div>
+          <div class="stat-desc">ROI in First Year</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proof" style="background-color: var(--light);">
+    <div class="container">
+      <h2>Proven Success in Healthcare</h2>
+      <p>Leading healthcare payers have already demonstrated the impact of advanced analytics automation:</p>
+      
+      <div class="flex">
+        <div class="col-50">
+          <div class="case-study">
+            <h4>Anthem (Elevance Health)</h4>
+            <p>Strategic migration to cloud computing with integrated AI and predictive analytics</p>
+            <div class="case-study-result">
+              <i>✓</i> Reached "one million mark" in automating infrastructure issues
+            </div>
+            <div class="case-study-result">
+              <i>✓</i> Self-healing infrastructure using predictive analytics
+            </div>
+            <div class="case-study-result">
+              <i>✓</i> Shifted focus from managing illness to promoting wellness
+            </div>
+          </div>
+          
+          <div class="case-study">
+            <h4>Blue Cross Blue Shield of Michigan</h4>
+            <p>Implementation of over 20 production AI applications</p>
+            <div class="case-study-result">
+              <i>✓</i> Evolved from least efficient to most efficient in BCBS system
+            </div>
+            <div class="case-study-result">
+              <i>✓</i> Successfully deployed 20+ production AI applications
+            </div>
+            <div class="case-study-result">
+              <i>✓</i> Developed three generative AI applications for commercial use
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-50">
+          <div class="case-study">
+            <h4>CVS Health/Aetna</h4>
+            <p>Integrated data analytics platform combining insurance and pharmacy data</p>
+            <div class="case-study-result">
+              <i>✓</i> 18% fewer hospitalizations and 10% fewer ER visits
+            </div>
+            <div class="case-study-result">
+              <i>✓</i> 4% higher non-urgent gaps in care closure rate
+            </div>
+            <div class="case-study-result">
+              <i>✓</i> Reduced medical spending by up to $117 per member per month
+            </div>
+          </div>
+          
+          <div class="case-study">
+            <h4>Blue Cross Blue Shield of North Carolina</h4>
+            <p>AI-powered platform for predictive modeling in medication adherence</p>
+            <div class="case-study-result">
+              <i>✓</i> 5.45x more efficient in targeting interventions
+            </div>
+            <div class="case-study-result">
+              <i>✓</i> 33% fewer calls while achieving better results
+            </div>
+            <div class="case-study-result">
+              <i>✓</i> 1.9x higher medication adherence rate among members
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="container">
+      <h2>Your Implementation Roadmap</h2>
+      <p style="max-width: 800px; margin: 0 auto 40px; text-align: center;">We've designed a streamlined implementation approach focused on delivering immediate value with the MLR forecasting use case, followed by a methodical expansion to other high-impact areas:</p>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-title">Phase 1: MLR Forecasting Implementation</div>
+            <div class="timeline-date">Weeks 1-8</div>
+            <ul>
+              <li><strong>Weeks 1-2:</strong> Initial data integration and assessment</li>
+              <li><strong>Weeks 3-4:</strong> MLR model training and validation</li>
+              <li><strong>Weeks 5-6:</strong> Pilot deployment with Medicare business</li>
+              <li><strong>Weeks 7-8:</strong> Full production deployment across all lines</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-title">Phase 2: Risk Assessment Expansion</div>
+            <div class="timeline-date">Months 3-4</div>
+            <ul>
+              <li>Risk model integration with clinical data sources</li>
+              <li>Zip-code level risk stratification implementation</li>
+              <li>Care management integration for high-risk members</li>
+              <li>ROI measurement against current risk adjustment process</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-title">Phase 3: Provider Analytics & Fraud Detection</div>
+            <div class="timeline-date">Months 5-7</div>
+            <ul>
+              <li>Provider performance analysis implementation</li>
+              <li>Network optimization tools deployment</li>
+              <li>Fraud detection models integration</li>
+              <li>Real-time monitoring dashboard launch</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-title">Phase 4: Enterprise-wide Deployment</div>
+            <div class="timeline-date">Months 8-12</div>
+            <ul>
+              <li>Clinical data analysis tools deployment</li>
+              <li>Self-service analytics rollout for business users</li>
+              <li>Advanced forecasting models for all key business lines</li>
+              <li>Integration with existing decision support systems</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" class="cta">
+    <div class="container">
+      <h2>Transform UnitedHealth's MLR Forecasting Today</h2>
+      <p style="margin-bottom: 15px;">Schedule a demonstration focused specifically on your MLR forecasting challenges.</p>
+      <p style="margin-bottom: 30px;">We'll show you exactly how TextQL can generate actionable insights in minutes, not weeks.</p>
+      <a href="#" class="btn">Schedule an MLR Forecasting Demo</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="display: flex; justify-content: center; margin-bottom: 25px; align-items: center;">
+        <img src="logos/textql-new.svg" alt="TextQL" style="height: 30px; margin-right: 20px; filter: brightness(0) invert(1);">
+        <img src="logos/unitedheathcare.png" alt="UnitedHealth Group" style="height: 30px; filter: brightness(0) invert(1);">
+      </div>
+      <p>© 2025 TextQL. All Rights Reserved.</p>
+      <p>Transforming enterprise data through autonomous deep research.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for animated numbers
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.animated-number');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      animatedElements.forEach(element => {
+        observer.observe(element);
+      });
+    });
+  </script>
+</body>
+</html>

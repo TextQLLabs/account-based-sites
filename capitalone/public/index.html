@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital One + TextQL: Data Intelligence Workshop</title>
+    <style>
+        :root {
+            --primary: #003174;
+            --secondary: #0076be;
+            --accent: #52b788;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logos img {
+            height: 60px;
+            margin: 0 1.5rem;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--gradient);
+        }
+        
+        .section-content {
+            font-size: 1.1rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        
+        .workshop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .workshop-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .workshop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .workshop-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #adb5bd;
+        }
+        
+        .workshop-content {
+            padding: 1.5rem;
+        }
+        
+        .workshop-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .workshop-description {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .workshop-details {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .agenda-item {
+            margin-bottom: 2rem;
+        }
+        
+        .agenda-time {
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .agenda-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .agenda-description {
+            color: #666;
+        }
+        
+        .facilitator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .facilitator-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .facilitator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .facilitator-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: #adb5bd;
+            overflow: hidden;
+        }
+        
+        .facilitator-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .facilitator-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .facilitator-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .facilitator-bio {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding: 0 1rem;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--secondary);
+            position: absolute;
+            opacity: 0.5;
+        }
+        
+        .testimonial-text::before {
+            top: -10px;
+            left: -5px;
+        }
+        
+        .testimonial-text::after {
+            bottom: -20px;
+            right: -5px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: #adb5bd;
+            overflow: hidden;
+        }
+        
+        .testimonial-author-info {
+            flex: 1;
+        }
+        
+        .testimonial-author-name {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .testimonial-author-title {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .faq-section {
+            margin-top: 3rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            color: #666;
+        }
+        
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-cta {
+            margin-bottom: 2rem;
+        }
+        
+        .footer-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-info {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .workshop-grid,
+            .metrics-grid,
+            .facilitator-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logos">
+                <img src="logos/capital-one.png" alt="Capital One Logo">
+                <span style="font-size: 2rem; margin: 0 0.5rem;">+</span>
+                <img src="logos/textql.svg" alt="TextQL Logo">
+            </div>
+            <div class="hero-text">
+                <h1>Data Intelligence Workshop</h1>
+                <p>A hands-on workshop exploring how AI can revolutionize data science operations and efficiency at Capital One</p>
+                <a href="#registration" class="cta-button">Register Now</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="section" id="overview">
+            <h2 class="section-title">Workshop Overview</h2>
+            <div class="section-content">
+                <p>Capital One is undergoing a transformative period with its recent Discover acquisition. With this expansion comes a growing data landscape and increased analytics demands on data science teams. This workshop introduces how TextQL's AI platform can help democratize data access, accelerate insights, and optimize data science workflows.</p>
+                
+                <p>Join us for an interactive session where we'll explore practical applications of AI-powered data intelligence within financial services organizations. You'll learn how to transform months of manual analysis work into minutes of automated intelligence.</p>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-number">4h</div>
+                        <div class="metric-label">Workshop Duration</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">3</div>
+                        <div class="metric-label">Hands-on Labs</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">6</div>
+                        <div class="metric-label">Use Cases Covered</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="who-should-attend">
+            <h2 class="section-title">Who Should Attend</h2>
+            <div class="section-content">
+                <p>This workshop is designed for Capital One professionals working in the following areas:</p>
+                
+                <div class="workshop-grid">
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Data Scientists</h3>
+                            <p class="workshop-description">Learn how AI can handle routine queries and analyses, freeing your time for high-value strategic initiatives.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Analytics Leaders</h3>
+                            <p class="workshop-description">Discover strategies for optimizing your data teams' productivity and impact across the organization.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Business Stakeholders</h3>
+                            <p class="workshop-description">Experience firsthand how democratized data access can accelerate decision-making and innovation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Technology Leaders</h3>
+                            <p class="workshop-description">Understand the integration of AI tools within your existing data infrastructure and tech stack.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="workshop-agenda">
+            <h2 class="section-title">Workshop Agenda</h2>
+            <div class="section-content">
+                <div class="agenda-item">
+                    <div class="agenda-time">9:00 AM - 9:30 AM</div>
+                    <div class="agenda-title">Welcome and Introduction</div>
+                    <div class="agenda-description">Overview of the day, introduction to workshop objectives, and context setting for Capital One's data challenges.</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">9:30 AM - 10:30 AM</div>
+                    <div class="agenda-title">The State of Data Science at Capital One</div>
+                    <div class="agenda-description">Analysis of current data landscape, challenges with the Discover integration, and opportunities for optimization. Discussion of typical data scientist workflows and pain points.</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">10:30 AM - 10:45 AM</div>
+                    <div class="agenda-title">Break</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">10:45 AM - 12:00 PM</div>
+                    <div class="agenda-title">Hands-on Lab 1: Natural Language to SQL</div>
+                    <div class="agenda-description">Interactive session exploring how AI can transform business questions into complex SQL queries. Participants will use TextQL's platform to analyze sample financial datasets with plain English questions.</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">12:00 PM - 1:00 PM</div>
+                    <div class="agenda-title">Lunch</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">1:00 PM - 2:15 PM</div>
+                    <div class="agenda-title">Hands-on Lab 2: Automating Regulatory Reporting</div>
+                    <div class="agenda-description">Practical exercises demonstrating how AI can automate compliance reporting, ensure consistency, and provide full data lineage documentation.</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">2:15 PM - 2:30 PM</div>
+                    <div class="agenda-title">Break</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">2:30 PM - 3:45 PM</div>
+                    <div class="agenda-title">Hands-on Lab 3: Data Democratization at Scale</div>
+                    <div class="agenda-description">Exploration of how business users can self-serve data needs while maintaining governance and security. Participants will experience the user journey from both business and data science perspectives.</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">3:45 PM - 4:30 PM</div>
+                    <div class="agenda-title">ROI Calculation and Implementation Planning</div>
+                    <div class="agenda-description">Interactive session on quantifying potential time and cost savings, plus creating a roadmap for implementation at Capital One.</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">4:30 PM - 5:00 PM</div>
+                    <div class="agenda-title">Q&A and Wrap-up</div>
+                    <div class="agenda-description">Open discussion, addressing specific questions, and next steps.</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="use-cases">
+            <h2 class="section-title">Key Use Cases</h2>
+            <div class="section-content">
+                <p>Throughout the workshop, we'll explore how TextQL's AI platform addresses specific data challenges at Capital One:</p>
+                
+                <div class="workshop-grid">
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Discover Acquisition Integration</h3>
+                            <p class="workshop-description">Accelerate data integration and analysis during the merger process, enabling business leaders to find insights across combined datasets.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Regulatory Compliance Reporting</h3>
+                            <p class="workshop-description">Automate the creation of CFPB and other regulatory reports with consistent methodology and comprehensive data lineage documentation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Customer Journey Optimization</h3>
+                            <p class="workshop-description">Enable product managers to analyze customer behavior patterns without technical assistance, reducing analysis time from weeks to minutes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Risk Modeling and Portfolio Analysis</h3>
+                            <p class="workshop-description">Allow risk analysts to interactively explore portfolio data, test hypotheses, and identify emerging patterns with AI assistance.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Data Cost Optimization</h3>
+                            <p class="workshop-description">Identify inefficient queries and patterns to optimize cloud computing costs while maintaining performance.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workshop-card">
+                        <div class="workshop-content">
+                            <h3 class="workshop-title">Cross-Department Data Sharing</h3>
+                            <p class="workshop-description">Break down data silos while maintaining governance and security by translating between business and technical terminology.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="facilitators">
+            <h2 class="section-title">Workshop Facilitators</h2>
+            <div class="section-content">
+                <div class="facilitator-grid">
+                    <div class="facilitator-card">
+                        <div class="facilitator-image">
+                            <img src="https://via.placeholder.com/120" alt="John Smith">
+                        </div>
+                        <div class="facilitator-name">John Smith</div>
+                        <div class="facilitator-title">Chief Data Scientist, TextQL</div>
+                        <div class="facilitator-bio">John has over 15 years of experience in data science and AI, with a focus on financial services. Previously led data teams at major financial institutions.</div>
+                    </div>
+                    
+                    <div class="facilitator-card">
+                        <div class="facilitator-image">
+                            <img src="https://via.placeholder.com/120" alt="Sarah Johnson">
+                        </div>
+                        <div class="facilitator-name">Sarah Johnson</div>
+                        <div class="facilitator-title">VP of Customer Success, TextQL</div>
+                        <div class="facilitator-bio">Sarah specializes in helping enterprise organizations implement AI solutions that drive measurable business outcomes.</div>
+                    </div>
+                    
+                    <div class="facilitator-card">
+                        <div class="facilitator-image">
+                            <img src="https://via.placeholder.com/120" alt="Michael Chen">
+                        </div>
+                        <div class="facilitator-name">Michael Chen</div>
+                        <div class="facilitator-title">Financial Services Practice Lead</div>
+                        <div class="facilitator-bio">Michael works directly with banking and financial services clients to optimize their data operations using AI-powered solutions.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="testimonials">
+            <h2 class="section-title">What Others Are Saying</h2>
+            <div class="section-content">
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            TextQL's workshop gave our team a clear vision of how AI can transform our data operations. We've already implemented several of the strategies and have seen a 40% reduction in routine query time.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-image"></div>
+                            <div class="testimonial-author-info">
+                                <div class="testimonial-author-name">David Lewis</div>
+                                <div class="testimonial-author-title">Chief Analytics Officer, Major Financial Institution</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            The hands-on labs were incredibly valuable. Being able to actually use the platform with our own data showed us exactly how it could fit into our workflows and deliver immediate value.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-image"></div>
+                            <div class="testimonial-author-info">
+                                <div class="testimonial-author-name">Jennifer Taylor</div>
+                                <div class="testimonial-author-title">Director of Data Science, Fortune 100 Company</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            What impressed me most was how seamlessly TextQL integrated with our existing tech stack. We didn't have to replace anything - it just enhanced what we already had and made it more powerful.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-image"></div>
+                            <div class="testimonial-author-info">
+                                <div class="testimonial-author-name">Robert Wong</div>
+                                <div class="testimonial-author-title">CTO, Banking Services Provider</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="section-content">
+                <div class="faq-item">
+                    <div class="faq-question">What technical background is required for this workshop?</div>
+                    <div class="faq-answer">The workshop is designed for participants with varying technical backgrounds. While data scientists and analysts will appreciate the technical details, business stakeholders will benefit from understanding the practical applications and business value. No coding experience is required.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How does TextQL's platform integrate with our existing data infrastructure?</div>
+                    <div class="faq-answer">TextQL works with your existing data infrastructure including AWS, Snowflake, Databricks, and BI tools like Tableau and Looker. It can be deployed on-premise within Capital One's environment, ensuring no sensitive data leaves your secure systems.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What security measures does TextQL have in place?</div>
+                    <div class="faq-answer">TextQL is SOC 2 Type II compliant and offers on-premise deployment options. The platform includes features for anonymizing sensitive data, role-based access control, and detailed audit logs. We'll discuss security in depth during the workshop.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How long does it typically take to implement the TextQL platform?</div>
+                    <div class="faq-answer">Implementation typically follows a phased approach: Discovery & Pilot (4 weeks), Controlled Expansion (8 weeks), and Enterprise Adoption (12 weeks). During the workshop, we'll create a customized implementation roadmap specific to Capital One's needs.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What ROI can we expect from implementing TextQL?</div>
+                    <div class="faq-answer">Organizations typically see a 35-40% productivity gain for data scientists, 99% faster insights delivery (from days to seconds), and 5.7x increase in self-service analytics adoption. For Capital One specifically, we estimate an annual value of $7-9M based on current data team size and operations.</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="registration">
+            <h2 class="section-title">Register for the Workshop</h2>
+            <div class="section-content">
+                <p>Join us for this exclusive workshop designed specifically for Capital One. Spaces are limited to ensure an interactive experience.</p>
+                
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Workshop Details</h3>
+                    
+                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 1rem 2rem; margin-bottom: 2rem;">
+                        <div style="font-weight: 700;">Date:</div>
+                        <div>June 15, 2025</div>
+                        
+                        <div style="font-weight: 700;">Time:</div>
+                        <div>9:00 AM - 5:00 PM EST</div>
+                        
+                        <div style="font-weight: 700;">Location:</div>
+                        <div>Capital One Headquarters, McLean, VA</div>
+                        
+                        <div style="font-weight: 700;">Format:</div>
+                        <div>In-person workshop with hands-on labs</div>
+                        
+                        <div style="font-weight: 700;">Cost:</div>
+                        <div>Complimentary for Capital One employees</div>
+                    </div>
+                    
+                    <a href="mailto:workshops@textql.com?subject=Capital%20One%20Workshop%20Registration" class="cta-button" style="margin-top: 0;">Register Now</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-cta">
+                <h2>Transform Your Data Experience</h2>
+                <p>Join us to discover how AI can revolutionize data operations at Capital One.</p>
+                <a href="mailto:workshops@textql.com?subject=Capital%20One%20Workshop%20Registration" class="cta-button">Register for the Workshop</a>
+            </div>
+            <div class="footer-info">
+                <p>© 2025 TextQL | SOC 2 Certified | On-Premise & Cloud Deployment Options Available</p>
+                <p>For questions, contact workshops@textql.com</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

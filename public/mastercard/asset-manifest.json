@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mastercard/static/css/main.e7073d63.css",
+    "main.js": "/mastercard/static/js/main.35e73eee.js",
+    "index.html": "/mastercard/index.html",
+    "main.e7073d63.css.map": "/mastercard/static/css/main.e7073d63.css.map",
+    "main.35e73eee.js.map": "/mastercard/static/js/main.35e73eee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e7073d63.css",
+    "static/js/main.35e73eee.js"
+  ]
+}
