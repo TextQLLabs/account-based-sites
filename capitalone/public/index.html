@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capital One + TextQL: Data Intelligence Workshop</title>
+    <title>Capital One + TextQL: From Weeks to Minutes</title>
     <style>
         :root {
-            /* Forest/Mint color scheme from Mastercard design system */
-            --primary: #2A3B35;      /* Deep Forest - Primary text/highlights */
-            --secondary: #4A665C;    /* Deep Sage - Secondary text */
-            --accent: #679986;       /* Forest-500 for accents */
+            /* Forest/Mint color scheme */
+            --primary: #2A3B35;
+            --secondary: #4A665C;
+            --accent: #679986;
             --forest-600: #4a665c;
             --forest-700: #395249;
             --forest-800: #2c3e37;
@@ -17,8 +17,8 @@
             --mint-500: #6e9584;
             --mint-600: #5a7d6c;
             --mint-700: #487059;
-            --light: #F5F2ED;        /* Eggshell/Cream - Background */
-            --surface: #E6EBE8;      /* Light Sage - UI panels */
+            --light: #F5F2ED;
+            --surface: #E6EBE8;
             --dark: #2A3B35;
             --gradient: linear-gradient(135deg, var(--forest-800), var(--forest-700));
         }
@@ -39,8 +39,16 @@
         header {
             background: var(--gradient);
             color: white;
-            padding: 2rem 0;
+            padding: 4rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             text-align: center;
+        }
+        
+        header *, header h1, header h3, header h4, header h5, header h6, header p {
+            color: white !important;
         }
         
         .header-content {
@@ -59,6 +67,7 @@
         .logos img {
             height: 60px;
             margin: 0 1.5rem;
+            filter: brightness(0) invert(1);
         }
         
         .hero-text h1 {
@@ -71,6 +80,360 @@
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .section-subtitle {
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Hero Story */
+        .hero-story {
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+        
+        /* Hero story background only when not used on header */
+        .hero-story:not(header) {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .urgent-question {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .workflow-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .workflow-side {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .sample-report {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .metric-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ccffcc;
+        }
+        
+        /* Chart Styles */
+        .chart-container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            height: 120px;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .bar {
+            background: linear-gradient(to top, #ccffcc, #8ab3a3);
+            border-radius: 3px 3px 0 0;
+            min-width: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            color: #2A3B35;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 0.2rem;
+        }
+        
+        .bar.danger {
+            background: linear-gradient(to top, #ffcccc, #ff9999);
+        }
+        
+        .pie-chart {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(#ccffcc 0deg 280deg, #ffcccc 280deg 360deg);
+            margin: 1rem auto;
+            position: relative;
+        }
+        
+        .pie-chart::after {
+            content: '78%';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .trend-line {
+            height: 80px;
+            background: linear-gradient(45deg, transparent 49%, #ccffcc 49%, #ccffcc 51%, transparent 51%);
+            margin: 1rem 0;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .trend-line::before {
+            content: '↗ Risk Trending Up';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: #ccffcc;
+        }
+        
+        .transformation-callout {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .roi-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .roi-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Challenge Cards */
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .challenge-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--mint-600);
+        }
+        
+        .impact-callout {
+            background: var(--surface);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* Architecture Cards */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .architecture-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--forest-600);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+        
+        .architecture-benefits {
+            background: var(--surface);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .architecture-benefits ul {
+            margin: 0.5rem 0 0 0;
+            padding-left: 1.2rem;
+        }
+        
+        .architecture-benefits li {
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+        }
+        
+        /* Use Case Gallery */
+        .use-case-gallery {
+            display: flex;
+            flex-direction: column;
+            margin: 2rem 0;
+        }
+        
+        .use-case-tabs {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .use-case-tab {
+            padding: 1rem;
+            background: white;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .use-case-tab:hover {
+            background: var(--surface);
+        }
+        
+        .use-case-tab.active {
+            background: var(--surface);
+            border-left: 4px solid var(--mint-600);
+            font-weight: bold;
+        }
+        
+        .use-case-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Security Section */
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .security-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        
+        .security-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .security-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--forest-600);
+            border-radius: 50%;
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+        
+        /* Implementation Timeline */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+        
+        .timeline-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .timeline-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--mint-600);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
         }
         
         .cta-button {
@@ -87,701 +450,514 @@
         
         .cta-button:hover {
             background-color: var(--mint-700);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-        
-        .section {
-            margin-bottom: 4rem;
-        }
-        
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100px;
-            height: 3px;
-            background: var(--gradient);
-        }
-        
-        .section-content {
-            font-size: 1.1rem;
-        }
-        
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .metric-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-top: 4px solid var(--mint-600);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .metric-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .metric-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--forest-600);
-            margin-bottom: 0.5rem;
-        }
-        
-        .metric-label {
-            font-size: 1.1rem;
-            color: var(--dark);
-        }
-        
-        .workshop-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .workshop-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-top: 4px solid var(--forest-600);
-            transition: all 0.3s ease;
-        }
-        
-        .workshop-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .workshop-image {
-            width: 100%;
-            height: 200px;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #adb5bd;
-        }
-        
-        .workshop-content {
-            padding: 1.5rem;
-        }
-        
-        .workshop-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .workshop-description {
-            margin-bottom: 1.5rem;
-            color: #666;
-        }
-        
-        .workshop-details {
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid #eee;
-            padding-top: 1rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .agenda-item {
-            margin-bottom: 2rem;
-        }
-        
-        .agenda-time {
-            font-weight: 700;
-            color: var(--mint-600);
-            margin-bottom: 0.5rem;
-        }
-        
-        .agenda-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        
-        .agenda-description {
-            color: #666;
-        }
-        
-        .facilitator-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .facilitator-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .facilitator-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .facilitator-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: #adb5bd;
-            overflow: hidden;
-        }
-        
-        .facilitator-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .facilitator-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        
-        .facilitator-title {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1rem;
-        }
-        
-        .facilitator-bio {
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .testimonial-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding: 0 1rem;
-        }
-        
-        .testimonial-text::before,
-        .testimonial-text::after {
-            content: '"';
-            font-size: 2rem;
-            color: var(--mint-600);
-            position: absolute;
-            opacity: 0.5;
-        }
-        
-        .testimonial-text::before {
-            top: -10px;
-            left: -5px;
-        }
-        
-        .testimonial-text::after {
-            bottom: -20px;
-            right: -5px;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .testimonial-author-image {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            color: #adb5bd;
-            overflow: hidden;
-        }
-        
-        .testimonial-author-info {
-            flex: 1;
-        }
-        
-        .testimonial-author-name {
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .testimonial-author-title {
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .faq-section {
-            margin-top: 3rem;
-        }
-        
-        .faq-item {
-            margin-bottom: 1.5rem;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--accent);
-        }
-        
-        .faq-question {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        
-        .faq-answer {
-            color: #666;
-        }
-        
-        footer {
-            background: var(--primary);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .footer-cta {
-            margin-bottom: 2rem;
-        }
-        
-        .footer-cta h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .footer-info {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            transform: translateY(-2px);
         }
         
         @media (max-width: 768px) {
+            .workflow-comparison {
+                grid-template-columns: 1fr;
+            }
             .hero-text h1 {
                 font-size: 2rem;
             }
-            
-            .workshop-grid,
-            .metrics-grid,
-            .facilitator-grid,
-            .testimonial-grid {
-                grid-template-columns: 1fr;
+            .section-title {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logos">
-                <img src="logos/capital-one.png" alt="Capital One Logo">
-                <span style="font-size: 2rem; margin: 0 0.5rem;">+</span>
-                <img src="logos/textql.svg" alt="TextQL Logo">
+    <header class="hero-story">
+        <div class="logos">
+            <img src="logos/capital-one.png" alt="Capital One Logo">
+            <span style="font-size: 2rem; margin: 0 0.5rem;">+</span>
+            <img src="logos/textql.svg" alt="TextQL Logo">
+        </div>
+        
+        <div class="hero-text">
+            <h1>From $45K to $10: Instant Risk Analysis</h1>
+            <p>How TextQL transforms Capital One's critical decision-making from 3-week investigations to 5-minute breakthroughs</p>
+        </div>
+        
+        <h3 style="text-align: center; font-size: 1.6rem; margin: 3rem 0;">What can Deep Research Agents do for you? Imagine this scenario...</h3>
+        
+        <h3 style="text-align: center; margin-bottom: 2rem;">🚨 The $50M Crisis</h3>
+        <p style="text-align: center; font-size: 1.1rem; font-style: italic; margin-bottom: 3rem;">
+            "Loss ratio in TX auto-loans spiked 15% MoM. Need root cause analysis by Friday's board meeting."
+        </p>
+        
+        <div class="workflow-comparison">
+            <div class="workflow-side">
+                <h4 style="color: #ffcccc; text-align: center; margin-bottom: 2rem;">Current Reality</h4>
+                
+                <div style="font-size: 3rem; font-weight: bold; color: #ffcccc; text-align: center;">3 Weeks</div>
+                <div style="font-size: 2rem; font-weight: bold; color: #ffcccc; text-align: center; margin: 1rem 0;">$45,000</div>
+                <div style="text-align: center; opacity: 0.8; margin-bottom: 2rem;">5 team members</div>
+                
+                <p style="font-size: 0.9rem; line-height: 1.6; text-align: center;">
+                    Week 1: Beg for data access<br>
+                    Week 2: Manual analysis<br>
+                    Week 3: PowerPoint panic
+                </p>
+                <div style="margin-top: 1rem; font-weight: bold; color: #ff6666; text-align: center;">
+                    Risk: Miss board deadline
+                </div>
             </div>
-            <div class="hero-text">
-                <h1>Data Intelligence Workshop</h1>
-                <p>A hands-on workshop exploring how AI can revolutionize data science operations and efficiency at Capital One</p>
-                <a href="#registration" class="cta-button">Register Now</a>
+            
+            <div class="workflow-side">
+                <h4 style="color: #ccffcc; text-align: center; margin-bottom: 2rem;">What if you could just ask?</h4>
+                
+                <p style="font-style: italic; font-size: 1rem; text-align: center; margin-bottom: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                    "Why did loss ratio in TX auto-loans spike 15% MoM in May?"
+                </p>
+                
+                <div style="font-size: 3rem; font-weight: bold; color: #ccffcc; text-align: center;">5 Minutes</div>
+                <div style="text-align: center; opacity: 0.8; margin: 0.5rem 0 2rem 0;">later...</div>
+                
+                <!-- Sample Report with flattened structure -->
+                <div style="background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: 10px; padding: 1.5rem; margin: 1rem 0;">
+                    <div style="border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+                        <h5>📊 Texas Auto Loan Risk Spike Analysis</h5>
+                        <p><strong>Generated:</strong> May 29, 2025 at 9:30 AM | <strong>Confidence:</strong> 94%</p>
+                    </div>
+                    
+                    <h6 style="font-weight: bold; margin-bottom: 0.5rem;">Executive Summary</h6>
+                    <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Loss ratio increase concentrated in 3 counties (Harris, Dallas, Tarrant) due to new subprime dealer partnerships initiated in April 2025. Projected Q3 impact: <strong style="color: #ffcccc;">$12M additional losses</strong> if unchanged.</p>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">$12M</div>
+                            <div>Projected Q3 Impact</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">3</div>
+                            <div>Problem Counties</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">78%</div>
+                            <div>Subprime Correlation</div>
+                        </div>
+                    </div>
+                    
+                    <h6 style="font-weight: bold; margin: 1rem 0 0.5rem 0; font-size: 0.9rem;">Loss Ratios by County (May 2025)</h6>
+                    <div class="bar-chart" style="margin-bottom: 1rem;">
+                        <div class="bar" style="height: 60%;"><span>2.1%</span><small>Austin</small></div>
+                        <div class="bar danger" style="height: 90%;"><span>4.8%</span><small>Harris</small></div>
+                        <div class="bar danger" style="height: 85%;"><span>4.5%</span><small>Dallas</small></div>
+                        <div class="bar danger" style="height: 80%;"><span>4.2%</span><small>Tarrant</small></div>
+                        <div class="bar" style="height: 45%;"><span>1.8%</span><small>Travis</small></div>
+                    </div>
+                    <p style="font-size: 0.8rem; opacity: 0.8; text-align: center; margin-bottom: 1rem;">Red bars indicate problem counties with new dealer partnerships</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+                        <div>
+                            <h6 style="font-weight: bold; margin-bottom: 0.5rem; font-size: 0.9rem;">Dealer Partnership Impact</h6>
+                            <div class="pie-chart"></div>
+                            <p style="font-size: 0.8rem; text-align: center;">78% correlation with new partnerships</p>
+                        </div>
+                        <div>
+                            <h6 style="font-weight: bold; margin-bottom: 0.5rem; font-size: 0.9rem;">Risk Trend (6 Months)</h6>
+                            <div class="trend-line"></div>
+                            <p style="font-size: 0.8rem; text-align: center;">Accelerating since April 2025</p>
+                        </div>
+                    </div>
+                    
+                    <h6 style="font-weight: bold; margin: 1rem 0 0.5rem 0;">Immediate Recommendations</h6>
+                    <p style="font-size: 0.9rem;">1. <strong>Temporary APR adjustment</strong> (+150 bps) for identified dealer channels<br>
+                    2. <strong>Enhanced credit counseling</strong> outreach to at-risk borrowers<br>
+                    3. <strong>Dealer agreement review</strong> with revised underwriting standards</p>
+                </div>
+                
+                <div style="background: rgba(200,255,200,0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <strong>Total Cost:</strong> $10 (automated analysis)<br>
+                    <strong>Result:</strong> Comprehensive analysis with specific actions<br>
+                    <strong>Impact:</strong> Immediate board presentation ready
+                </div>
+            </div>
+        </div>
+                
+                <div class="transformation-callout">
+                    <h3>The Transformation Impact</h3>
+                    <div class="roi-grid">
+                        <div class="roi-card">
+                            <div>Time to Answer</div>
+                            <div style="color: #ffcccc;">3 weeks</div>
+                            <div>→</div>
+                            <div style="color: #ccffcc; font-weight: bold;">5 minutes</div>
+                        </div>
+                        <div class="roi-card">
+                            <div>Team Required</div>
+                            <div style="color: #ffcccc;">5 people</div>
+                            <div>→</div>
+                            <div style="color: #ccffcc; font-weight: bold;">1 person</div>
+                        </div>
+                        <div class="roi-card">
+                            <div>Analysis Depth</div>
+                            <div style="color: #ffcccc;">County-level</div>
+                            <div>→</div>
+                            <div style="color: #ccffcc; font-weight: bold;">2,000+ segments</div>
+                        </div>
+                        <div class="roi-card">
+                            <div>Cost per Analysis</div>
+                            <div style="color: #ffcccc;">$45,000</div>
+                            <div>→</div>
+                            <div style="color: #ccffcc; font-weight: bold;">$10</div>
+                        </div>
+                        <div class="roi-card">
+                            <div>Confidence Level</div>
+                            <div style="color: #ffcccc;">Medium</div>
+                            <div>→</div>
+                            <div style="color: #ccffcc; font-weight: bold;">94%</div>
+                        </div>
+                        <div class="roi-card">
+                            <div>Business Impact</div>
+                            <div style="color: #ffcccc;">Reactive</div>
+                            <div>→</div>
+                            <div style="color: #ccffcc; font-weight: bold;">$4M Loss Prevention</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
     
-    <main>
-        <section class="section" id="overview">
-            <h2 class="section-title">Workshop Overview</h2>
-            <div class="section-content">
-                <p>Capital One is undergoing a transformative period with its recent Discover acquisition. With this expansion comes a growing data landscape and increased analytics demands on data science teams. This workshop introduces how TextQL's AI platform can help democratize data access, accelerate insights, and optimize data science workflows.</p>
-                
-                <p>Join us for an interactive session where we'll explore practical applications of AI-powered data intelligence within financial services organizations. You'll learn how to transform months of manual analysis work into minutes of automated intelligence.</p>
-                
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-number">4h</div>
-                        <div class="metric-label">Workshop Duration</div>
+    <!-- Challenge Landscape -->
+    <section class="section" style="background: var(--surface);">
+        <div class="container">
+            <h2 class="section-title">Capital One's Critical Data Challenges</h2>
+            <p class="section-subtitle">Complex infrastructure facing urgent decision-making demands</p>
+            
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <h3>Manual Risk Analysis at Scale</h3>
+                    <p>Capital One monitors thousands of metrics across credit risk, fraud, and portfolio performance. Traditional analysis can't keep pace with executive urgency.</p>
+                    <div class="impact-callout">
+                        <strong>Key Impact:</strong> $45K per analysis, 3-week delays on critical decisions
                     </div>
-                    <div class="metric-card">
-                        <div class="metric-number">3</div>
-                        <div class="metric-label">Hands-on Labs</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-number">6</div>
-                        <div class="metric-label">Use Cases Covered</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section" id="who-should-attend">
-            <h2 class="section-title">Who Should Attend</h2>
-            <div class="section-content">
-                <p>This workshop is designed for Capital One professionals working in the following areas:</p>
-                
-                <div class="workshop-grid">
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Data Scientists</h3>
-                            <p class="workshop-description">Learn how AI can handle routine queries and analyses, freeing your time for high-value strategic initiatives.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Analytics Leaders</h3>
-                            <p class="workshop-description">Discover strategies for optimizing your data teams' productivity and impact across the organization.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Business Stakeholders</h3>
-                            <p class="workshop-description">Experience firsthand how democratized data access can accelerate decision-making and innovation.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Technology Leaders</h3>
-                            <p class="workshop-description">Understand the integration of AI tools within your existing data infrastructure and tech stack.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section" id="workshop-agenda">
-            <h2 class="section-title">Workshop Agenda</h2>
-            <div class="section-content">
-                <div class="agenda-item">
-                    <div class="agenda-time">9:00 AM - 9:30 AM</div>
-                    <div class="agenda-title">Welcome and Introduction</div>
-                    <div class="agenda-description">Overview of the day, introduction to workshop objectives, and context setting for Capital One's data challenges.</div>
                 </div>
                 
-                <div class="agenda-item">
-                    <div class="agenda-time">9:30 AM - 10:30 AM</div>
-                    <div class="agenda-title">The State of Data Science at Capital One</div>
-                    <div class="agenda-description">Analysis of current data landscape, challenges with the Discover integration, and opportunities for optimization. Discussion of typical data scientist workflows and pain points.</div>
-                </div>
-                
-                <div class="agenda-item">
-                    <div class="agenda-time">10:30 AM - 10:45 AM</div>
-                    <div class="agenda-title">Break</div>
-                </div>
-                
-                <div class="agenda-item">
-                    <div class="agenda-time">10:45 AM - 12:00 PM</div>
-                    <div class="agenda-title">Hands-on Lab 1: Natural Language to SQL</div>
-                    <div class="agenda-description">Interactive session exploring how AI can transform business questions into complex SQL queries. Participants will use TextQL's platform to analyze sample financial datasets with plain English questions.</div>
-                </div>
-                
-                <div class="agenda-item">
-                    <div class="agenda-time">12:00 PM - 1:00 PM</div>
-                    <div class="agenda-title">Lunch</div>
-                </div>
-                
-                <div class="agenda-item">
-                    <div class="agenda-time">1:00 PM - 2:15 PM</div>
-                    <div class="agenda-title">Hands-on Lab 2: Automating Regulatory Reporting</div>
-                    <div class="agenda-description">Practical exercises demonstrating how AI can automate compliance reporting, ensure consistency, and provide full data lineage documentation.</div>
-                </div>
-                
-                <div class="agenda-item">
-                    <div class="agenda-time">2:15 PM - 2:30 PM</div>
-                    <div class="agenda-title">Break</div>
-                </div>
-                
-                <div class="agenda-item">
-                    <div class="agenda-time">2:30 PM - 3:45 PM</div>
-                    <div class="agenda-title">Hands-on Lab 3: Data Democratization at Scale</div>
-                    <div class="agenda-description">Exploration of how business users can self-serve data needs while maintaining governance and security. Participants will experience the user journey from both business and data science perspectives.</div>
-                </div>
-                
-                <div class="agenda-item">
-                    <div class="agenda-time">3:45 PM - 4:30 PM</div>
-                    <div class="agenda-title">ROI Calculation and Implementation Planning</div>
-                    <div class="agenda-description">Interactive session on quantifying potential time and cost savings, plus creating a roadmap for implementation at Capital One.</div>
-                </div>
-                
-                <div class="agenda-item">
-                    <div class="agenda-time">4:30 PM - 5:00 PM</div>
-                    <div class="agenda-title">Q&A and Wrap-up</div>
-                    <div class="agenda-description">Open discussion, addressing specific questions, and next steps.</div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section" id="use-cases">
-            <h2 class="section-title">Key Use Cases</h2>
-            <div class="section-content">
-                <p>Throughout the workshop, we'll explore how TextQL's AI platform addresses specific data challenges at Capital One:</p>
-                
-                <div class="workshop-grid">
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Discover Acquisition Integration</h3>
-                            <p class="workshop-description">Accelerate data integration and analysis during the merger process, enabling business leaders to find insights across combined datasets.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Regulatory Compliance Reporting</h3>
-                            <p class="workshop-description">Automate the creation of CFPB and other regulatory reports with consistent methodology and comprehensive data lineage documentation.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Customer Journey Optimization</h3>
-                            <p class="workshop-description">Enable product managers to analyze customer behavior patterns without technical assistance, reducing analysis time from weeks to minutes.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Risk Modeling and Portfolio Analysis</h3>
-                            <p class="workshop-description">Allow risk analysts to interactively explore portfolio data, test hypotheses, and identify emerging patterns with AI assistance.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Data Cost Optimization</h3>
-                            <p class="workshop-description">Identify inefficient queries and patterns to optimize cloud computing costs while maintaining performance.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="workshop-card">
-                        <div class="workshop-content">
-                            <h3 class="workshop-title">Cross-Department Data Sharing</h3>
-                            <p class="workshop-description">Break down data silos while maintaining governance and security by translating between business and technical terminology.</p>
-                        </div>
+                <div class="challenge-card">
+                    <h3>Cross-System Data Integration</h3>
+                    <p>Risk data lives across core banking, CRM, fraud detection, and external bureaus. Data scientists spend 70% of time on preparation.</p>
+                    <div class="impact-callout">
+                        <strong>Key Impact:</strong> 2-3 weeks lost to data preparation on urgent investigations
                     </div>
                 </div>
-            </div>
-        </section>
-        
-        <section class="section" id="facilitators">
-            <h2 class="section-title">Workshop Facilitators</h2>
-            <div class="section-content">
-                <div class="facilitator-grid">
-                    <div class="facilitator-card">
-                        <div class="facilitator-image">
-                            <img src="https://via.placeholder.com/120" alt="John Smith">
-                        </div>
-                        <div class="facilitator-name">John Smith</div>
-                        <div class="facilitator-title">Chief Data Scientist, TextQL</div>
-                        <div class="facilitator-bio">John has over 15 years of experience in data science and AI, with a focus on financial services. Previously led data teams at major financial institutions.</div>
-                    </div>
-                    
-                    <div class="facilitator-card">
-                        <div class="facilitator-image">
-                            <img src="https://via.placeholder.com/120" alt="Sarah Johnson">
-                        </div>
-                        <div class="facilitator-name">Sarah Johnson</div>
-                        <div class="facilitator-title">VP of Customer Success, TextQL</div>
-                        <div class="facilitator-bio">Sarah specializes in helping enterprise organizations implement AI solutions that drive measurable business outcomes.</div>
-                    </div>
-                    
-                    <div class="facilitator-card">
-                        <div class="facilitator-image">
-                            <img src="https://via.placeholder.com/120" alt="Michael Chen">
-                        </div>
-                        <div class="facilitator-name">Michael Chen</div>
-                        <div class="facilitator-title">Financial Services Practice Lead</div>
-                        <div class="facilitator-bio">Michael works directly with banking and financial services clients to optimize their data operations using AI-powered solutions.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section" id="testimonials">
-            <h2 class="section-title">What Others Are Saying</h2>
-            <div class="section-content">
-                <div class="testimonial-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            TextQL's workshop gave our team a clear vision of how AI can transform our data operations. We've already implemented several of the strategies and have seen a 40% reduction in routine query time.
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="testimonial-author-image"></div>
-                            <div class="testimonial-author-info">
-                                <div class="testimonial-author-name">David Lewis</div>
-                                <div class="testimonial-author-title">Chief Analytics Officer, Major Financial Institution</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            The hands-on labs were incredibly valuable. Being able to actually use the platform with our own data showed us exactly how it could fit into our workflows and deliver immediate value.
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="testimonial-author-image"></div>
-                            <div class="testimonial-author-info">
-                                <div class="testimonial-author-name">Jennifer Taylor</div>
-                                <div class="testimonial-author-title">Director of Data Science, Fortune 100 Company</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            What impressed me most was how seamlessly TextQL integrated with our existing tech stack. We didn't have to replace anything - it just enhanced what we already had and made it more powerful.
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="testimonial-author-image"></div>
-                            <div class="testimonial-author-info">
-                                <div class="testimonial-author-name">Robert Wong</div>
-                                <div class="testimonial-author-title">CTO, Banking Services Provider</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section" id="faq">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="section-content">
-                <div class="faq-item">
-                    <div class="faq-question">What technical background is required for this workshop?</div>
-                    <div class="faq-answer">The workshop is designed for participants with varying technical backgrounds. While data scientists and analysts will appreciate the technical details, business stakeholders will benefit from understanding the practical applications and business value. No coding experience is required.</div>
-                </div>
                 
-                <div class="faq-item">
-                    <div class="faq-question">How does TextQL's platform integrate with our existing data infrastructure?</div>
-                    <div class="faq-answer">TextQL works with your existing data infrastructure including AWS, Snowflake, Databricks, and BI tools like Tableau and Looker. It can be deployed on-premise within Capital One's environment, ensuring no sensitive data leaves your secure systems.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">What security measures does TextQL have in place?</div>
-                    <div class="faq-answer">TextQL is SOC 2 Type II compliant and offers on-premise deployment options. The platform includes features for anonymizing sensitive data, role-based access control, and detailed audit logs. We'll discuss security in depth during the workshop.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">How long does it typically take to implement the TextQL platform?</div>
-                    <div class="faq-answer">Implementation typically follows a phased approach: Discovery & Pilot (4 weeks), Controlled Expansion (8 weeks), and Enterprise Adoption (12 weeks). During the workshop, we'll create a customized implementation roadmap specific to Capital One's needs.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">What ROI can we expect from implementing TextQL?</div>
-                    <div class="faq-answer">Organizations typically see a 35-40% productivity gain for data scientists, 99% faster insights delivery (from days to seconds), and 5.7x increase in self-service analytics adoption. For Capital One specifically, we estimate an annual value of $7-9M based on current data team size and operations.</div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section" id="registration">
-            <h2 class="section-title">Register for the Workshop</h2>
-            <div class="section-content">
-                <p>Join us for this exclusive workshop designed specifically for Capital One. Spaces are limited to ensure an interactive experience.</p>
-                
-                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); margin-top: 2rem;">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Workshop Details</h3>
-                    
-                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 1rem 2rem; margin-bottom: 2rem;">
-                        <div style="font-weight: 700;">Date:</div>
-                        <div>June 15, 2025</div>
-                        
-                        <div style="font-weight: 700;">Time:</div>
-                        <div>9:00 AM - 5:00 PM EST</div>
-                        
-                        <div style="font-weight: 700;">Location:</div>
-                        <div>Capital One Headquarters, McLean, VA</div>
-                        
-                        <div style="font-weight: 700;">Format:</div>
-                        <div>In-person workshop with hands-on labs</div>
-                        
-                        <div style="font-weight: 700;">Cost:</div>
-                        <div>Complimentary for Capital One employees</div>
+                <div class="challenge-card">
+                    <h3>Regulatory Compliance Pressure</h3>
+                    <p>CCAR, DFAST, and stress testing require sophisticated analysis with audit trails. Manual processes struggle with documentation.</p>
+                    <div class="impact-callout">
+                        <strong>Key Impact:</strong> $2M+ annual compliance overhead, regulatory risk
                     </div>
-                    
-                    <a href="mailto:workshops@textql.com?subject=Capital%20One%20Workshop%20Registration" class="cta-button" style="margin-top: 0;">Register Now</a>
                 </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-cta">
-                <h2>Transform Your Data Experience</h2>
-                <p>Join us to discover how AI can revolutionize data operations at Capital One.</p>
-                <a href="mailto:workshops@textql.com?subject=Capital%20One%20Workshop%20Registration" class="cta-button">Register for the Workshop</a>
-            </div>
-            <div class="footer-info">
-                <p>© 2025 TextQL | SOC 2 Certified | On-Premise & Cloud Deployment Options Available</p>
-                <p>For questions, contact workshops@textql.com</p>
             </div>
         </div>
-    </footer>
+    </section>
+    
+    <!-- Solution Architecture -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">TextQL's Three-Layer Architecture</h2>
+            <p class="section-subtitle">Purpose-built for Capital One's complex risk analysis needs</p>
+            
+            <div class="architecture-grid">
+                <div class="architecture-card">
+                    <h3 style="color: var(--mint-600);">🧠 Ontology Layer</h3>
+                    <p>Maps technical data structures to business concepts, enabling unified risk terminology across all Capital One systems.</p>
+                    <div class="architecture-benefits">
+                        <p><strong>Key Benefits:</strong></p>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Unified risk terminology</li>
+                            <li>Cross-database analytics</li>
+                            <li>Business-friendly data access</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="architecture-card">
+                    <h3 style="color: var(--forest-600);">⚡ Compute Layer</h3>
+                    <p>Delivers computational power for processing massive transaction volumes securely with optimized performance.</p>
+                    <div class="architecture-benefits">
+                        <p><strong>Key Benefits:</strong></p>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Arrow-native efficiency</li>
+                            <li>Secure container isolation</li>
+                            <li>Complex join optimization</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="architecture-card">
+                    <h3 style="color: var(--accent);">🤖 Dakota Agent Framework</h3>
+                    <p>Enables intelligent automation while maintaining controls and transparency for regulated banking environments.</p>
+                    <div class="architecture-benefits">
+                        <p><strong>Key Benefits:</strong></p>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Auditable execution paths</li>
+                            <li>Regulatory compliance</li>
+                            <li>On-premise deployment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Use Case Gallery -->
+    <section class="section" style="background: var(--surface);">
+        <div class="container">
+            <h2 class="section-title">Five High-Value Use Cases</h2>
+            <p class="section-subtitle">Targeted applications with powerful ROI for Capital One</p>
+            
+            <div class="use-case-gallery">
+                <div class="use-case-tabs">
+                    <div class="use-case-tab active">
+                        <h4>🔍 Credit Risk Modeling</h4>
+                        <p>By state, metro, ZIP-3, customer segment with early warning on delinquency spikes</p>
+                    </div>
+                    <div class="use-case-tab">
+                        <h4>📊 Loss Ratio Analysis</h4>
+                        <p>Auto-loan vs. credit-card vs. mortgage with drill-downs by vintage and channel</p>
+                    </div>
+                    <div class="use-case-tab">
+                        <h4>💰 Marketing ROI (ROAS)</h4>
+                        <p>Campaign × channel × geography with real-time budget re-allocation</p>
+                    </div>
+                    <div class="use-case-tab">
+                        <h4>🛡️ Fraud & AML Detection</h4>
+                        <p>Unusual transaction patterns by cohort and suspicious device clusters</p>
+                    </div>
+                    <div class="use-case-tab">
+                        <h4>👥 Customer Retention</h4>
+                        <p>Attrition drivers by product, tenure, risk score with next-best-offer forecasting</p>
+                    </div>
+                </div>
+                
+                <div class="use-case-content">
+                    <h3>Credit Risk Modeling</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: var(--surface); padding: 1rem; border-radius: 8px;">
+                            <p style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">Current Timeline</p>
+                            <p style="font-size: 1.2rem; font-weight: bold;">2-4 weeks</p>
+                        </div>
+                        <div style="background: rgba(138, 179, 163, 0.2); padding: 1rem; border-radius: 8px;">
+                            <p style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">With TextQL</p>
+                            <p style="font-size: 1.2rem; font-weight: bold; color: var(--forest-600);">Hours</p>
+                        </div>
+                    </div>
+                    <p><strong>Impact:</strong> 90% reduction in analysis time</p>
+                    <div style="background: rgba(106, 149, 132, 0.1); border-left: 4px solid var(--forest-600); padding: 1rem; margin-top: 1rem;">
+                        <p><strong>ROI:</strong> Enhanced detection rate by 300%, early warning prevents $50M+ annual losses</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ROI Metrics -->
+    <section class="section" style="background: var(--gradient); color: white;">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Quantifiable P&L Impact</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: rgba(255,255,255,0.9);">
+                TextQL delivers compelling financial returns for Capital One
+            </p>
+            
+            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; margin-bottom: 3rem;">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Annual Financial Impact</h3>
+                <div class="roi-grid">
+                    <div class="roi-card">
+                        <div class="roi-number" style="color: #ffcccc;">$10.8M</div>
+                        <div>Current Analysis Cost</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">240 analyses × $45K</div>
+                    </div>
+                    <div class="roi-card">
+                        <div class="roi-number" style="color: #ccffcc;">$2,400</div>
+                        <div>Future Analysis Cost</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">240 analyses × $10</div>
+                    </div>
+                    <div class="roi-card">
+                        <div class="roi-number" style="color: #ffffcc;">$50M+</div>
+                        <div>Risk Prevention Value</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Early intervention</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                    <div>
+                        <div style="font-size: 3rem; font-weight: bold;">4,500x</div>
+                        <div style="font-size: 1.2rem;">ROI in Year One</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Enterprise Security -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Enterprise-Ready Security & Compliance</h2>
+            <p class="section-subtitle">Built to meet Capital One's stringent security requirements</p>
+            
+            <div class="security-grid">
+                <div class="security-card">
+                    <h3 style="color: var(--mint-600); margin-bottom: 1.5rem;">🔒 Banking-Grade Security</h3>
+                    <div class="security-item">
+                        <div class="security-icon"></div>
+                        <div>
+                            <p><strong>SOC 2 Type II compliance</strong></p>
+                            <p style="font-size: 0.9rem; color: var(--secondary);">Comprehensive verification of security controls</p>
+                        </div>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon"></div>
+                        <div>
+                            <p><strong>On-premise deployment</strong></p>
+                            <p style="font-size: 0.9rem; color: var(--secondary);">Complete data sovereignty for sensitive financial data</p>
+                        </div>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon"></div>
+                        <div>
+                            <p><strong>Container-based isolation</strong></p>
+                            <p style="font-size: 0.9rem; color: var(--secondary);">Secure execution environments for every analysis</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="security-card">
+                    <h3 style="color: var(--forest-600); margin-bottom: 1.5rem;">⚖️ Regulatory Compliance</h3>
+                    <div class="security-item">
+                        <div class="security-icon"></div>
+                        <div>
+                            <p><strong>CCAR/DFAST alignment</strong></p>
+                            <p style="font-size: 0.9rem; color: var(--secondary);">Automated stress testing and documentation</p>
+                        </div>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon"></div>
+                        <div>
+                            <p><strong>Complete audit trails</strong></p>
+                            <p style="font-size: 0.9rem; color: var(--secondary);">Every analysis step documented and traceable</p>
+                        </div>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon"></div>
+                        <div>
+                            <p><strong>Role-based access control</strong></p>
+                            <p style="font-size: 0.9rem; color: var(--secondary);">Fine-grained permissions with regulatory oversight</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Implementation Roadmap -->
+    <section class="section" style="background: var(--surface);">
+        <div class="container">
+            <h2 class="section-title">Implementation Roadmap</h2>
+            <p class="section-subtitle">Proven path to transformational ROI</p>
+            
+            <div class="timeline-grid">
+                <div class="timeline-card">
+                    <div class="timeline-number">1</div>
+                    <h4 style="margin-top: 1rem; margin-bottom: 1rem;">Foundation</h4>
+                    <p style="color: var(--mint-600); font-weight: bold; margin-bottom: 1rem;">Months 1-3</p>
+                    <ul style="space-y: 0.5rem;">
+                        <li>Deploy proof-of-value on Texas risk scenario</li>
+                        <li>Map critical data sources and ontology</li>
+                        <li>Establish KPI measurement framework</li>
+                        <li>Train initial risk analysis team</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-card">
+                    <div class="timeline-number">2</div>
+                    <h4 style="margin-top: 1rem; margin-bottom: 1rem;">Expansion</h4>
+                    <p style="color: var(--mint-600); font-weight: bold; margin-bottom: 1rem;">Months 4-6</p>
+                    <ul>
+                        <li>Extend to all 5 high-value use cases</li>
+                        <li>Integrate with existing BI tools</li>
+                        <li>Scale to regional risk teams</li>
+                        <li>Document initial ROI metrics</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-card">
+                    <div class="timeline-number">3</div>
+                    <h4 style="margin-top: 1rem; margin-bottom: 1rem;">Enterprise Scale</h4>
+                    <p style="color: var(--mint-600); font-weight: bold; margin-bottom: 1rem;">Months 7-12</p>
+                    <ul>
+                        <li>Roll out to all business units</li>
+                        <li>Implement automated monitoring</li>
+                        <li>Develop Capital One custom capabilities</li>
+                        <li>Achieve full 4,500x ROI</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section class="section" style="background: var(--gradient); color: white; text-align: center;">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Meet Us at Snowflake Summit 2025</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                Join us for an exclusive executive demo session to see the Texas risk scenario in action with live data.
+            </p>
+            
+            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; margin: 2rem 0; display: inline-block;">
+                <h3 style="margin-bottom: 1.5rem;">🏔️ Snowflake Summit Executive Demo</h3>
+                <div style="display: grid; grid-template-columns: auto 1fr; gap: 1rem 2rem; text-align: left; margin-bottom: 2rem;">
+                    <div style="font-weight: bold;">When:</div>
+                    <div>June 3-6, 2025</div>
+                    
+                    <div style="font-weight: bold;">Where:</div>
+                    <div>San Francisco, CA</div>
+                    
+                    <div style="font-weight: bold;">Demo Duration:</div>
+                    <div>30-minute executive briefing</div>
+                    
+                    <div style="font-weight: bold;">What You'll See:</div>
+                    <div>Live $4M+ impact demonstration</div>
+                </div>
+                
+                <!-- Contact Form -->
+                <form action="mailto:ethan@textql.com" method="post" enctype="text/plain" style="text-align: left; max-width: 400px; margin: 0 auto;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Name:</label>
+                        <input type="text" name="name" required style="width: 100%; padding: 0.75rem; border: none; border-radius: 5px; font-size: 1rem;">
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Title:</label>
+                        <input type="text" name="title" required style="width: 100%; padding: 0.75rem; border: none; border-radius: 5px; font-size: 1rem;">
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email:</label>
+                        <input type="email" name="email" required style="width: 100%; padding: 0.75rem; border: none; border-radius: 5px; font-size: 1rem;">
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Company:</label>
+                        <input type="text" name="company" value="Capital One" readonly style="width: 100%; padding: 0.75rem; border: none; border-radius: 5px; font-size: 1rem; background: rgba(255,255,255,0.9);">
+                    </div>
+                    
+                    <button type="submit" class="cta-button" style="width: 100%; margin-top: 0;">
+                        Book Executive Demo Session
+                    </button>
+                </form>
+            </div>
+            
+            <p style="margin-top: 2rem; opacity: 0.8; font-size: 0.9rem;">
+                Can't make it to Summit? Contact us directly at <strong>ethan@textql.com</strong> | (212) 555-1234<br>
+                <em>Or schedule a virtual demo at your convenience</em>
+            </p>
+        </div>
+    </section>
 </body>
 </html>
