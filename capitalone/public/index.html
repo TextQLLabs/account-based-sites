@@ -67,6 +67,16 @@
         .logos img {
             height: 60px;
             margin: 0 1.5rem;
+        }
+        
+        .logos img[src*="capital-one"] {
+            /* filter: brightness(0) invert(1); */
+            height: 50px; /* Slightly smaller for better proportion */
+            border: 2px solid red; /* Debug border to see if image loads */
+            background: white; /* White background to make logo visible */
+        }
+        
+        .logos img[src*="textql"] {
             filter: brightness(0) invert(1);
         }
         
