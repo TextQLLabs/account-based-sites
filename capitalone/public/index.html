@@ -6,12 +6,21 @@
     <title>Capital One + TextQL: Data Intelligence Workshop</title>
     <style>
         :root {
-            --primary: #003174;
-            --secondary: #0076be;
-            --accent: #52b788;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            /* Forest/Mint color scheme from Mastercard design system */
+            --primary: #2A3B35;      /* Deep Forest - Primary text/highlights */
+            --secondary: #4A665C;    /* Deep Sage - Secondary text */
+            --accent: #679986;       /* Forest-500 for accents */
+            --forest-600: #4a665c;
+            --forest-700: #395249;
+            --forest-800: #2c3e37;
+            --mint-400: #8ab3a3;
+            --mint-500: #6e9584;
+            --mint-600: #5a7d6c;
+            --mint-700: #487059;
+            --light: #F5F2ED;        /* Eggshell/Cream - Background */
+            --surface: #E6EBE8;      /* Light Sage - UI panels */
+            --dark: #2A3B35;
+            --gradient: linear-gradient(135deg, var(--forest-800), var(--forest-700));
         }
         
         * {
@@ -66,7 +75,7 @@
         
         .cta-button {
             display: inline-block;
-            background-color: var(--accent);
+            background-color: var(--mint-600);
             color: white;
             padding: 1rem 2rem;
             border-radius: 5px;
@@ -77,6 +86,7 @@
         }
         
         .cta-button:hover {
+            background-color: var(--mint-700);
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
@@ -125,6 +135,7 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--mint-600);
             text-align: center;
             transition: all 0.3s ease;
         }
@@ -137,7 +148,7 @@
         .metric-number {
             font-size: 3rem;
             font-weight: 700;
-            color: var(--secondary);
+            color: var(--forest-600);
             margin-bottom: 0.5rem;
         }
         
@@ -158,6 +169,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--forest-600);
             transition: all 0.3s ease;
         }
         
@@ -207,7 +219,7 @@
         
         .agenda-time {
             font-weight: 700;
-            color: var(--secondary);
+            color: var(--mint-600);
             margin-bottom: 0.5rem;
         }
         
@@ -314,7 +326,7 @@
         .testimonial-text::after {
             content: '"';
             font-size: 2rem;
-            color: var(--secondary);
+            color: var(--mint-600);
             position: absolute;
             opacity: 0.5;
         }
@@ -371,6 +383,7 @@
             padding: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--accent);
         }
         
         .faq-question {
