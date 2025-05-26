@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TextQL + UnitedHealth: $2.3B Analytics Transformation</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
       /* Design system colors */
@@ -144,6 +145,7 @@
     
     section {
       padding: 80px 0;
+      overflow-x: hidden;
     }
     
     #hero {
@@ -373,6 +375,7 @@
       position: relative;
       max-width: 1200px;
       margin: 40px auto 40px;
+      overflow: hidden;
     }
     
     .timeline::after {
@@ -392,6 +395,7 @@
       width: 50%;
       box-sizing: border-box;
       margin-bottom: 40px;
+      max-width: 50%;
     }
     
     .timeline-item::after {
@@ -755,16 +759,6 @@
         <span style="margin: 0 12px; color: var(--light-50); font-weight: 300;">for</span>
         <img src="logos/unitedheathcare.png" alt="UnitedHealth Group" style="height: 30px;">
       </div>
-      <nav>
-        <ul>
-          <li><a href="#story" style="color: var(--light-50);">Our Story</a></li>
-          <li><a href="#mlr-case" style="color: var(--light-50);">MLR Forecasting</a></li>
-          <li><a href="#more-cases" style="color: var(--light-50);">More Use Cases</a></li>
-          <li><a href="#roadmap" style="color: var(--light-50);">Roadmap</a></li>
-          <li><a href="#" style="color: var(--light-50);">Snowflake Workshop Primer</a></li>
-          <li><a href="#cta" class="btn btn-outline">Get Started</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
 
@@ -907,6 +901,43 @@
         </ul>
       </div>
       
+      <!-- Interactive MLR Visualizations -->
+      <div style="margin: 40px 0;">
+        <h3 style="text-align: center; margin-bottom: 30px; color: var(--light-50);">MLR Analysis Dashboard</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 30px;">
+          <div style="background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h5 style="margin-bottom: 20px; color: var(--primary); text-align: center;">MLR by Region</h5>
+            <div style="height: 300px; position: relative;">
+              <canvas id="mlr-region-chart"></canvas>
+            </div>
+          </div>
+          
+          <div style="background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h5 style="margin-bottom: 20px; color: var(--primary); text-align: center;">MLR Trend Analysis</h5>
+            <div style="height: 300px; position: relative;">
+              <canvas id="mlr-trend-chart"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;">
+          <div style="background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h5 style="margin-bottom: 20px; color: var(--primary); text-align: center;">Intervention Impact Forecast</h5>
+            <div style="height: 300px; position: relative;">
+              <canvas id="intervention-chart"></canvas>
+            </div>
+          </div>
+          
+          <div style="background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h5 style="margin-bottom: 20px; color: var(--primary); text-align: center;">Cost Savings Breakdown</h5>
+            <div style="height: 300px; position: relative;">
+              <canvas id="savings-chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="quote" style="font-size: 1.2rem; text-align: center;">
         "TextQL's autonomous research capabilities deliver the granular MLR insights we need in hours, not weeks. This is a game-changer for our actuarial and finance teams."
       </div>
@@ -1050,7 +1081,8 @@
       <h2>Your Implementation Roadmap</h2>
       <p style="max-width: 800px; margin: 0 auto 40px; text-align: center;">We've designed a streamlined implementation approach focused on delivering immediate value with the MLR forecasting use case, followed by a methodical expansion to other high-impact areas:</p>
       
-      <div class="timeline">
+      <div style="overflow-x: hidden;">
+        <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-content">
             <div class="timeline-title">Phase 1: MLR Forecasting Implementation</div>
@@ -1103,6 +1135,7 @@
           </div>
         </div>
       </div>
+      </div>
     </div>
   </section>
 
@@ -1144,6 +1177,190 @@
       
       animatedElements.forEach(element => {
         observer.observe(element);
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // MLR by Region Chart
+      const regionCtx = document.getElementById('mlr-region-chart').getContext('2d');
+      new Chart(regionCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Northeast', 'Southeast', 'Midwest', 'West', 'Southwest'],
+          datasets: [{
+            label: 'Current MLR (%)',
+            data: [84.2, 85.4, 81.8, 83.1, 82.7],
+            backgroundColor: '#005087',
+            borderColor: '#005087',
+            borderWidth: 1
+          }, {
+            label: 'Projected MLR (%)',
+            data: [81.1, 82.1, 80.5, 81.3, 81.8],
+            backgroundColor: '#00a4e4',
+            borderColor: '#00a4e4',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              position: 'bottom'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return context.dataset.label + ': ' + context.parsed.y + '%';
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              min: 79,
+              max: 87,
+              title: {
+                display: true,
+                text: 'MLR (%)'
+              }
+            }
+          }
+        }
+      });
+
+      // MLR Trend Analysis Chart
+      const trendCtx = document.getElementById('mlr-trend-chart').getContext('2d');
+      new Chart(trendCtx, {
+        type: 'line',
+        data: {
+          labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', 'Q1 2025', 'Q2 2025'],
+          datasets: [{
+            label: 'Actual MLR',
+            data: [83.2, 84.1, 84.7, 85.1, null, null],
+            borderColor: '#005087',
+            backgroundColor: 'rgba(0, 80, 135, 0.1)',
+            borderWidth: 3,
+            fill: false,
+            tension: 0.4,
+            spanGaps: false
+          }, {
+            label: 'Traditional Forecast',
+            data: [82.8, 83.5, 84.2, 84.8, 85.2, 85.8],
+            borderColor: '#e74c3c',
+            borderWidth: 2,
+            borderDash: [5, 5],
+            fill: false,
+            pointStyle: 'triangle'
+          }, {
+            label: 'TextQL Forecast',
+            data: [82.1, 82.3, 82.8, 83.1, 82.9, 82.4],
+            borderColor: '#00a4e4',
+            backgroundColor: 'rgba(0, 164, 228, 0.1)',
+            borderWidth: 3,
+            fill: false,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              position: 'bottom'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              min: 81,
+              max: 87,
+              title: {
+                display: true,
+                text: 'MLR (%)'
+              }
+            }
+          }
+        }
+      });
+
+      // Intervention Impact Chart
+      const interventionCtx = document.getElementById('intervention-chart').getContext('2d');
+      new Chart(interventionCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Provider Contract\nAdjustment', 'Care Management\nEnhancement', 'Premium\nAdjustment', 'Network\nOptimization'],
+          datasets: [{
+            label: 'Net Benefit ($M)',
+            data: [24.8, 18.5, 29.2, 12.1],
+            backgroundColor: ['#005087', '#00a4e4', '#A3738A', '#8AB3A3'],
+            borderColor: ['#005087', '#00a4e4', '#A3738A', '#8AB3A3'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return '$' + context.parsed.y + 'M Net Benefit';
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Net Benefit ($M)'
+              }
+            }
+          }
+        }
+      });
+
+      // Cost Savings Breakdown Chart
+      const savingsCtx = document.getElementById('savings-chart').getContext('2d');
+      new Chart(savingsCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Provider Cost Reduction', 'Care Management', 'Premium Optimization', 'Network Efficiency'],
+          datasets: [{
+            data: [45, 28, 18, 9],
+            backgroundColor: ['#005087', '#00a4e4', '#A3738A', '#8AB3A3'],
+            borderWidth: 2,
+            borderColor: '#fff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                padding: 20,
+                usePointStyle: true
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return context.label + ': ' + context.parsed + '%';
+                }
+              }
+            }
+          }
+        }
       });
     });
   </script>

@@ -11,6 +11,9 @@ app.use('/unitedhealthcaregroup', express.static(path.join(__dirname, 'unitedhea
 // Serve static files from athenahealth directory
 app.use('/athenahealth', express.static(path.join(__dirname, 'athenahealth/public')));
 
+// Serve static files from capitalone directory
+app.use('/capitalone', express.static(path.join(__dirname, 'capitalone/public')));
+
 // Root route shows welcome message
 app.get('/', function (req, res) {
   res.send(`
@@ -56,6 +59,7 @@ app.get('/', function (req, res) {
           text-decoration: none;
           font-weight: 500;
           transition: background-color 0.15s;
+          margin: 0.5rem;
         }
         .button:hover {
           background-color: #0e6b61;
@@ -68,8 +72,9 @@ app.get('/', function (req, res) {
         <p>You probably got here from a customer workshop invite! This is the entry point to our account-based sites.</p>
         <p>To explore a specific customer site, please use the links provided in your workshop invite.</p>
         <a href="/mastercard" class="button">Go to Mastercard Demo</a>
-        <a href="/unitedhealthcaregroup" class="button" style="margin-left: 10px; background-color: #005087;">Go to UnitedHealthcare Demo</a>
-        <a href="/athenahealth" class="button" style="margin-left: 10px; background-color: #00AEEF;">Go to Athenahealth Demo</a>
+        <a href="/unitedhealthcaregroup" class="button" style="background-color: #005087;">Go to UnitedHealthcare Demo</a>
+        <a href="/athenahealth" class="button" style="background-color: #00AEEF;">Go to athenahealth Demo</a>
+        <a href="/capitalone" class="button" style="background-color: #0076be;">Go to Capital One Workshop</a>
       </div>
     </body>
     </html>
@@ -84,5 +89,9 @@ app.get('/mastercard', function (req, res) {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`Mastercard site is available at http://localhost:${PORT}/mastercard`);
+  console.log(`Available sites:`);
+  console.log(`- Mastercard: http://localhost:${PORT}/mastercard`);
+  console.log(`- UnitedHealthcare: http://localhost:${PORT}/unitedhealthcaregroup`);
+  console.log(`- athenahealth: http://localhost:${PORT}/athenahealth`);
+  console.log(`- Capital One: http://localhost:${PORT}/capitalone`);
 });
