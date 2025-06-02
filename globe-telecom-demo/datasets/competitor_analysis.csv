@@ -1,0 +1,51 @@
+area_id,location_name,latitude,longitude,competitor_name,campaign_type,campaign_start_date,campaign_intensity,target_segment,offer_type,estimated_reach,globe_customers_affected,market_share_threat_level,response_required
+AREA001,Makati CBD,14.5547,121.0244,DITO,aggressive_pricing,2025-05-15,high,postpaid_premium,unlimited_data_promo,85000,12500,high,immediate
+AREA002,BGC Taguig,14.5515,121.0473,Smart,retention_campaign,2025-05-18,medium,high_value,device_upgrade,45000,8200,medium,within_48h
+AREA003,Ortigas Center,14.5866,121.0598,DITO,network_expansion,2025-05-20,high,all_segments,coverage_improvement,120000,18750,high,immediate
+AREA004,Quezon City,14.6760,121.0437,Smart,price_war,2025-05-12,high,prepaid_youth,data_bundle_discount,95000,14200,high,immediate
+AREA005,Manila Bay Area,14.5995,120.9842,DITO,brand_awareness,2025-05-22,medium,family_plans,group_discounts,70000,9800,medium,within_72h
+AREA006,Alabang,14.4289,121.0420,Smart,customer_acquisition,2025-05-14,high,new_residents,welcome_packages,55000,7950,medium,within_48h
+AREA007,Pasig City,14.5764,121.0851,DITO,aggressive_pricing,2025-05-16,high,business_segment,enterprise_solutions,40000,6100,high,immediate
+AREA008,Mandaluyong,14.5832,121.0409,Smart,loyalty_program,2025-05-19,low,existing_customers,rewards_upgrade,35000,4200,low,within_week
+AREA009,San Juan,14.6019,121.0355,DITO,network_expansion,2025-05-21,high,urban_professionals,5G_rollout,60000,9500,high,immediate
+AREA010,Paranaque,14.4793,121.0198,Smart,retention_campaign,2025-05-13,medium,family_plans,loyalty_bonuses,48000,6850,medium,within_48h
+AREA011,Las Pinas,14.4644,120.9822,DITO,aggressive_pricing,2025-05-17,high,price_sensitive,budget_plans,65000,8900,high,immediate
+AREA012,Muntinlupa,14.3833,121.0167,Smart,customer_acquisition,2025-05-23,medium,young_professionals,starter_packages,42000,5650,medium,within_72h
+AREA013,Marikina,14.6507,121.1029,DITO,brand_awareness,2025-05-11,medium,suburban_families,community_events,38000,4980,low,within_week
+AREA014,Antipolo,14.5873,121.1790,Smart,network_expansion,2025-05-24,high,growing_population,infrastructure_upgrade,75000,11200,high,immediate
+AREA015,Cainta,14.5774,121.1215,DITO,aggressive_pricing,2025-05-25,high,emerging_market,penetration_pricing,52000,7300,medium,within_48h
+AREA016,Rodriguez,14.7203,121.1067,Smart,customer_acquisition,2025-05-10,medium,rural_connectivity,basic_plans,28000,3450,low,within_week
+AREA017,Taytay,14.5634,121.1325,DITO,retention_campaign,2025-05-26,medium,existing_base,service_improvement,31000,4100,medium,within_72h
+AREA018,Pasay City,14.5378,120.9996,Smart,price_war,2025-05-27,high,airport_corridor,roaming_packages,67000,9850,high,immediate
+AREA019,Pateros,14.5436,121.0697,DITO,brand_awareness,2025-05-09,low,small_community,local_partnerships,15000,1890,low,within_week
+AREA020,Taguig South,14.5176,121.0509,Smart,aggressive_pricing,2025-05-28,high,residential_growth,home_bundles,58000,8100,medium,within_48h
+AREA021,Valenzuela,14.7000,120.9833,DITO,network_expansion,2025-05-29,high,industrial_area,business_connectivity,45000,6200,medium,within_48h
+AREA022,Malabon,14.6667,120.9667,Smart,customer_acquisition,2025-05-08,medium,dense_population,mass_market_plans,39000,4750,medium,within_72h
+AREA023,Navotas,14.6667,120.9500,DITO,aggressive_pricing,2025-05-30,high,fishing_community,affordable_plans,25000,2950,low,within_week
+AREA024,Caloocan North,14.7167,120.9833,Smart,retention_campaign,2025-05-07,medium,established_base,upgrade_incentives,72000,10800,medium,within_48h
+AREA025,Caloocan South,14.6500,120.9667,DITO,brand_awareness,2025-05-31,medium,mixed_demographics,diverse_offerings,54000,7100,medium,within_72h
+AREA026,Fairview QC,14.7333,121.0667,Smart,network_expansion,2025-06-01,high,residential_boom,coverage_expansion,89000,13450,high,immediate
+AREA027,Commonwealth QC,14.7000,121.0500,DITO,aggressive_pricing,2025-05-06,high,middle_class,value_propositions,76000,10200,high,immediate
+AREA028,Novaliches QC,14.7167,121.0333,Smart,customer_acquisition,2025-06-02,medium,suburban_growth,family_packages,63000,8450,medium,within_48h
+AREA029,La Mesa QC,14.7000,121.0833,DITO,retention_campaign,2025-05-05,low,loyal_customers,service_enhancements,21000,2650,low,within_week
+AREA030,San Mateo,14.6967,121.1219,Smart,price_war,2025-06-03,high,commuter_belt,mobility_plans,48000,6850,medium,within_48h
+AREA031,Marikina Heights,14.6700,121.1200,DITO,brand_awareness,2025-05-04,medium,upscale_residential,premium_services,33000,4200,medium,within_72h
+AREA032,Eastwood QC,14.6167,121.0833,Smart,aggressive_pricing,2025-06-04,high,business_district,corporate_packages,41000,5950,medium,within_48h
+AREA033,Katipunan QC,14.6333,121.0667,DITO,network_expansion,2025-05-03,high,university_belt,student_plans,37000,4700,medium,within_72h
+AREA034,Diliman QC,14.6500,121.0667,Smart,customer_acquisition,2025-06-05,medium,academic_community,education_discounts,44000,5800,medium,within_48h
+AREA035,Teacher's Village,14.6167,121.0667,DITO,retention_campaign,2025-05-02,low,professional_community,specialized_offers,18000,2150,low,within_week
+AREA036,Cubao QC,14.6167,121.0500,Smart,price_war,2025-06-06,high,transport_hub,commuter_deals,82000,12350,high,immediate
+AREA037,Kamias QC,14.6333,121.0500,DITO,aggressive_pricing,2025-05-01,high,mixed_residential,flexible_plans,56000,7650,medium,within_48h
+AREA038,South Triangle,14.6000,121.0333,Smart,brand_awareness,2025-06-07,medium,government_area,institutional_packages,29000,3450,low,within_week
+AREA039,Project 4 QC,14.6167,121.0333,DITO,customer_acquisition,2025-04-30,medium,established_neighborhood,loyalty_migration,35000,4100,medium,within_72h
+AREA040,Bago Bantay QC,14.6000,121.0167,Smart,network_expansion,2025-06-08,high,growing_area,infrastructure_investment,47000,6200,medium,within_48h
+AREA041,Santol QC,14.6333,121.0167,DITO,retention_campaign,2025-04-29,medium,residential_core,service_upgrades,32000,3850,medium,within_72h
+AREA042,Kamuning QC,14.6167,121.0167,Smart,aggressive_pricing,2025-06-09,high,commercial_strip,business_promotions,38000,5100,medium,within_48h
+AREA043,Scout Area QC,14.6000,121.0000,DITO,brand_awareness,2025-04-28,low,entertainment_district,lifestyle_packages,26000,2900,low,within_week
+AREA044,Tomas Morato QC,14.6167,121.0000,Smart,customer_acquisition,2025-06-10,medium,dining_entertainment,social_plans,34000,4450,medium,within_72h
+AREA045,Timog QC,14.6333,121.0000,DITO,price_war,2025-04-27,high,nightlife_area,unlimited_packages,41000,5750,medium,within_48h
+AREA046,Malate Manila,14.5739,120.9928,Smart,network_expansion,2025-06-11,high,tourist_district,international_roaming,36000,4300,medium,within_48h
+AREA047,Ermita Manila,14.5861,120.9917,DITO,aggressive_pricing,2025-04-26,high,business_hotels,corporate_rates,28000,3150,medium,within_72h
+AREA048,Intramuros Manila,14.5906,120.9744,Smart,brand_awareness,2025-06-12,low,historical_tourism,heritage_packages,19000,1950,low,within_week
+AREA049,Chinatown Manila,14.6006,120.9739,DITO,customer_acquisition,2025-04-25,medium,commercial_hub,merchant_solutions,43000,5400,medium,within_48h
+AREA050,Port Area Manila,14.5833,120.9667,Smart,retention_campaign,2025-06-13,medium,logistics_center,industrial_plans,31000,3700,medium,within_72h

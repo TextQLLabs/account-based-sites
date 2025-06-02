@@ -1,0 +1,31 @@
+campaign_id,campaign_name,start_date,end_date,target_segment,customer_value_tier,offer_type,total_targeted,responses_received,save_rate_percent,revenue_impact_php,cost_per_acquisition,a_b_test_variant,historical_performance,recommended_action
+RET001,High Value Data Boost,2025-05-01,2025-05-31,high_churn_risk,premium,data_allocation_increase,15000,10050,67.0,8500000,850,variant_a,baseline,scale_up
+RET002,Family Plan Migration,2025-05-05,2025-06-04,family_opportunity,high_value,group_plan_discount,8500,2890,34.0,4200000,1450,variant_b,+12%_vs_baseline,optimize_offer
+RET003,GCash Integration Promo,2025-05-10,2025-06-09,gcash_inactive,mid_tier,wallet_incentives,12000,3600,30.0,2800000,780,variant_a,baseline,continue_testing
+RET004,Network Quality Assurance,2025-05-15,2025-06-14,coverage_complaints,premium,service_credits,6200,1922,31.0,3100000,1610,variant_c,+8%_vs_baseline,expand_geographically
+RET005,Competitor Defense,2025-05-20,2025-06-19,competitor_exposed,high_value,loyalty_bonus,18500,5735,31.0,7200000,1255,variant_a,baseline,immediate_activation
+RET006,Youth Retention Bundle,2025-04-25,2025-05-25,under_25_segment,mid_tier,entertainment_bundle,9800,2940,30.0,1950000,665,variant_b,+5%_vs_baseline,extend_duration
+RET007,International Roamer VIP,2025-05-12,2025-06-11,frequent_travelers,premium,roaming_credits,3200,1024,32.0,2400000,2344,variant_a,baseline,maintain_current
+RET008,Business Account Upgrade,2025-05-08,2025-06-07,sme_customers,high_value,enterprise_features,5500,1650,30.0,3300000,2000,variant_c,+15%_vs_baseline,accelerate_rollout
+RET009,Postpaid Conversion Drive,2025-04-20,2025-05-20,prepaid_heavy_users,mid_tier,plan_upgrade_discount,14200,4688,33.0,3800000,810,variant_b,+18%_vs_baseline,expand_targeting
+RET010,Premium Support Access,2025-05-18,2025-06-17,service_complainants,premium,priority_support,4800,1440,30.0,2200000,1528,variant_a,baseline,continue_monitoring
+RET011,Device Protection Plus,2025-05-03,2025-06-02,device_upgrade_due,high_value,insurance_bundle,7900,2370,30.0,1800000,760,variant_c,+10%_vs_baseline,increase_budget
+RET012,Data Rollover Advantage,2025-05-25,2025-06-24,data_conscious_users,mid_tier,unused_data_credit,11500,3450,30.0,2100000,610,variant_b,+7%_vs_baseline,optimize_timing
+RET013,5G Early Access,2025-05-07,2025-06-06,tech_enthusiasts,premium,network_priority,2800,896,32.0,1900000,2120,variant_a,baseline,selective_expansion
+RET014,Family Sharing Expansion,2025-05-22,2025-06-21,multi_line_families,high_value,additional_lines_free,6100,1830,30.0,2800000,1530,variant_c,+20%_vs_baseline,national_rollout
+RET015,Loyalty Rewards Boost,2025-04-30,2025-05-30,long_tenure_customers,premium,points_multiplier,9200,2760,30.0,3500000,1268,variant_b,+3%_vs_baseline,maintain_status_quo
+RET016,Smart Home Bundle,2025-05-14,2025-06-13,home_broadband_prospects,high_value,iot_device_discount,4700,1410,30.0,2600000,1844,variant_a,baseline,test_new_markets
+RET017,Student Plan Special,2025-05-11,2025-06-10,university_areas,mid_tier,education_discount,8600,2580,30.0,1400000,545,variant_c,+25%_vs_baseline,semester_alignment
+RET018,Weekend Warrior Data,2025-05-28,2025-06-27,weekend_heavy_users,mid_tier,weekend_unlimited,7300,2190,30.0,1600000,730,variant_b,+12%_vs_baseline,seasonal_adjustment
+RET019,Gaming Performance Plus,2025-05-16,2025-06-15,mobile_gamers,premium,low_latency_priority,3500,1085,31.0,2000000,1844,variant_a,baseline,esports_partnerships
+RET020,Travel Companion Plan,2025-05-19,2025-06-18,frequent_domestic_travelers,high_value,nationwide_roaming_free,5800,1740,30.0,2900000,1667,variant_c,+14%_vs_baseline,tourism_partnerships
+RET021,Senior Citizen Care,2025-05-06,2025-06-05,60_plus_segment,mid_tier,simplified_billing,3900,1170,30.0,980000,838,variant_b,+8%_vs_baseline,community_outreach
+RET022,Night Owl Data Boost,2025-05-24,2025-06-23,late_night_users,mid_tier,midnight_data_bonus,6800,2040,30.0,1300000,637,variant_a,baseline,usage_pattern_analysis
+RET023,Emergency Contact Plus,2025-05-13,2025-06-12,safety_conscious,premium,emergency_services_bundle,4200,1260,30.0,1800000,1429,variant_c,+6%_vs_baseline,government_partnerships
+RET024,Content Creator Support,2025-05-21,2025-06-20,high_upload_users,high_value,unlimited_upload_data,2900,899,31.0,1700000,1890,variant_b,+22%_vs_baseline,influencer_programs
+RET025,Overseas Worker Care,2025-05-09,2025-06-08,ofw_families,premium,international_calling_free,7600,2280,30.0,3400000,1491,variant_a,baseline,remittance_partnerships
+RET026,Health & Wellness Bundle,2025-05-27,2025-06-26,health_app_users,mid_tier,fitness_app_subscriptions,5100,1530,30.0,1200000,784,variant_c,+16%_vs_baseline,healthcare_partnerships
+RET027,Music Streaming Unlimited,2025-05-17,2025-06-16,music_heavy_users,mid_tier,spotify_premium_included,8900,2670,30.0,1800000,674,variant_b,+19%_vs_baseline,artist_collaborations
+RET028,Video Conference Pro,2025-05-26,2025-06-25,remote_workers,high_value,zoom_premium_bundle,4600,1380,30.0,2500000,1812,variant_a,baseline,corporate_partnerships
+RET029,Gaming Tournament Pass,2025-05-23,2025-06-22,competitive_gamers,premium,tournament_entry_credits,2100,651,31.0,1300000,1997,variant_c,+28%_vs_baseline,esports_league_sponsorship
+RET030,Social Media Boost,2025-05-29,2025-06-28,social_media_heavy,mid_tier,instagram_facebook_unlimited,10200,3060,30.0,1950000,637,variant_b,+11%_vs_baseline,influencer_partnerships
